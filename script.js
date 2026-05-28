@@ -10,9 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
       "nav-skills": "02 / Skills",
       "nav-projects": "03 / Projects",
       "nav-education": "04 / Education & Certs",
+      "nav-impossible": "05 / Impossible List",
 
       "btn-download-resume": "View Curriculum Vitae",
       "btn-consultation": "Initiate Briefing",
+      "btn-impossible-list": "Impossible List",
 
       "about-heading": "01 / About",
       "about-p1": "I approach digital security with the same precision, discretion, and technical rigor required in mission-critical environments. Currently a first-year DUT Cybersecurity student at EST Tétouan, I specialize in designing secure network perimeters and threat defense workflows.",
@@ -36,6 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
       "skill-offensive-item2": "• Simulated Brute-Force Testing (Hydra, hping3)",
       "skill-offensive-item3": "• Digital Forensics & Reverse Engineering",
       "skill-offensive-item4": "• Lab-Environment Malware Isolation",
+      "skills-languages-title": "Languages & Scripting",
+      "skills-languages-item1": "• Python (OOP & Socket Automation)",
+      "skills-languages-item2": "• Unix Bash Shell Scripting & C Programming",
+      "skills-languages-item3": "• SQL Database Querying & Design",
+      "skills-languages-item4": "• Spanish Translation Support & Setup",
       "skill-automation-title": "Automation & Virtualization",
       "skill-automation-item1": "• Python Scripting (OOP & Socket Automation)",
       "skill-automation-item2": "• Unix Bash Shell Scripting & C Programming",
@@ -77,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-ensi-desc": "ENSI 2K26 CTF (Cyberspace x ENSI) — 11 Flags solved (May 2026)",
       "ctf-nsec-desc": "NorthSec 2026 — 6 Flags solved (April 2026)",
       "ctf-morocco-spain-desc": "Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 Flags solved (Team ANARCHOTECH) (May 2026)",
-      "ctf-skills-desc": "Acreed Competencies: Digital Forensics, Web Exploitation, Reverse Engineering.",
+      "ctf-skills-desc": "Acquired Competencies: Digital Forensics, Web Exploitation, Reverse Engineering.",
 
       "footer-desc": "Designed & Engineered with absolute discretion. Built using custom structural markup, Tailwind CSS utility layers, and lightweight client-side scripts. Deployable instantly on Vercel.",
       
@@ -110,9 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
       "nav-skills": "02 / Compétences",
       "nav-projects": "03 / Projets",
       "nav-education": "04 / Formation & Certifs",
+      "nav-impossible": "05 / Liste Impossible",
 
       "btn-download-resume": "Voir le Curriculum Vitae",
       "btn-consultation": "Initier le Briefing",
+      "btn-impossible-list": "Liste Impossible",
 
       "about-heading": "01 / À Propos",
       "about-p1": "J'aborde la sécurité numérique avec la même précision, discrétion et rigueur technique exigées dans les infrastructures critiques. Actuellement étudiant en 1ère année DUT Cybersécurité à l'EST Tétouan, je me spécialise dans la conception de périmètres réseau sécurisés et le déploiement de workflows de détection.",
@@ -200,6 +209,108 @@ document.addEventListener('DOMContentLoaded', () => {
       "project-5-title": "CyberSec Active Directory Commander",
       "project-5-desc": "Développement d'une suite d'administration de bureau de niveau entreprise en Python avec protocoles LDAP/LDAPS pour gérer et auditer les objets Active Directory. Intègre des opérations par lots (activation/désactivation/suppression en masse), une arborescence interactive des UOs et des journaux d'audit pour conformité SIEM.",
       "proj-ad-repo": "Dépôt de Code"
+    },
+    es: {
+      "hero-subtitle": "Ciberseguridad e Infraestructura de Red",
+      "hero-tagline": "Estudiante de primer año de DUT Ciberseguridad en EST Tetuán, apasionado por la detección de amenazas, arquitecturas SIEM, auditoría de redes y competiciones de CTF.",
+      "status-ready": "Prácticas de iniciación a finales de 2026: Listo para el compromiso",
+      
+      "nav-about": "01 / Sobre mí",
+      "nav-skills": "02 / Habilidades",
+      "nav-projects": "03 / Proyectos",
+      "nav-education": "04 / Educación y Certificados",
+      "nav-impossible": "05 / Lista Imposible",
+
+      "btn-download-resume": "Ver Curriculum Vitae",
+      "btn-consultation": "Iniciar briefing",
+      "btn-impossible-list": "Lista Imposible",
+
+      "about-heading": "01 / Sobre mí",
+      "about-p1": "Me acerco a la seguridad digital con la misma precisión, discreción y rigor técnico necesarios en entornos de misión crítica. Actualmente estudiante de primer año de DUT Ciberseguridad en EST Tetuán, me especializo en el diseño de perímetros de red seguros y flujos de trabajo de defensa contra amenazas.",
+      "about-p2": "Mi experiencia práctica incluye el despliegue en laboratorio de soluciones SIEM y NIDS/IPS (Wazuh, Suricata, Snort) junto con simulaciones activas de Red Team. Esta exposición de doble cara me permite construir reglas de correlación efectivas y validar la cobertura de amenazas utilizando herramientas como Nmap, Hydra, SQLMap y hping3.",
+      "about-p3": "Soy un jugador activo de CTF (resolviendo desafíos en ENSI CTF y NorthSec), centrándome en análisis forense digital, explotación web e ingeniería inversa. Busco unas prácticas de iniciación para finales de 2026 para aplicar mi curiosidad técnica y habilidades de resolución de problemas a infraestructuras corporativas reales.",
+
+      "skills-heading": "02 / Habilidades",
+      "skills-intro": "Un índice estructurado de competencias técnicas cultivadas a través de proyectos universitarios, laboratorios domésticos y entornos de desafíos de CTF.",
+      "skill-secops-title": "Operaciones de Seguridad y SIEM",
+      "skill-secops-item1": "• Wazuh SIEM, Suricata NIDS, Snort IDS/IPS",
+      "skill-secops-item2": "• Correlación de eventos y análisis de logs de auditoría",
+      "skill-secops-item3": "• Búsqueda de amenazas y monitoreo de incidentes",
+      "skill-secops-item4": "• Supervisión activa de sistemas con Zabbix",
+      "skill-netdef-title": "Infraestructura de Red y Defensa",
+      "skill-netdef-item1": "• Ingeniería de perímetros seguros y configuración de VPN",
+      "skill-netdef-item2": "• Administración de Windows Server (Active Directory, GPO)",
+      "skill-netdef-item3": "• Auditoría de la pila OSI/TCP-IP y captura de paquetes",
+      "skill-netdef-item4": "• Firewalls, protocolos de enrutamiento y modos IDS/IPS",
+      "skill-offensive-title": "Auditoría Ofensiva y de Vulnerabilidades",
+      "skill-offensive-item1": "• Escaneo de vulnerabilidades (Nmap, Nikto, SQLMap)",
+      "skill-offensive-item2": "• Pruebas de fuerza bruta simuladas (Hydra, hping3)",
+      "skill-offensive-item3": "• Análisis forense digital e ingeniería inversa",
+      "skill-offensive-item4": "• Aislamiento de malware en entornos de laboratorio",
+      "skill-automation-title": "Automatización y Virtualización",
+      "skill-automation-item1": "• Scripting en Python (POO y automatización de sockets)",
+      "skill-automation-item2": "• Scripting en Bash Unix y programación en C",
+      "skill-automation-item3": "• Virtualización (VMware, VirtualBox)",
+      "skill-automation-item4": "• Maquetas de laboratorio con Cisco Packet Tracer",
+
+      "projects-heading": "03 / Proyectos",
+      "project-1-meta": "Proyecto Académico",
+      "project-1-title": "Integración de Wazuh SIEM y Suricata NIDS",
+      "project-1-desc": "Desplegué una arquitectura Wazuh completa (Manager + Agentes) integrada con Suricata NIDS para el análisis de eventos EVE JSON. Realicé campañas simuladas de Red Team (escaneos Nmap, fuerza bruta SSH/FTP/RDP con Hydra, inyecciones SQLMap y DoS por inundación SYN hping3) desde Kali Linux, correlacionando y auditando eventos para validar la cobertura de reglas.",
+      "proj-wazuh-report": "Ver Informe de Proyecto",
+      "project-2-meta": "Laboratorio Personal",
+      "project-2-title": "Despliegue Inline de Snort IDS/IPS",
+      "project-2-desc": "Instalé y configuré Snort 3 en modo IPS en línea (NFQ) para el bloqueo activo de amenazas. Desarrollé reglas de detección personalizadas dirigidas a anomalías de tráfico ICMP, fuerza bruta SSH y escaneos SYN con Nmap. Validé acciones defensivas contra vectores web como inyecciones SQL.",
+      "proj-snort-presentation": "Ver Presentación",
+      "proj-snort-report": "Ver Informe de Laboratorio",
+      "project-3-meta": "Proyecto Académico",
+      "project-3-title": "Plataforma Web Capture The Flag",
+      "project-3-desc": "Diseñé y lancé una plataforma web CTF funcional y multijugador basada en programación orientada a objetos en Python. Implementé la ejecución de desafíos aislados por usuario, rastreadores de puntuación automatizados y paneles de administración limpios. Alojado en producción en Railway.",
+      "proj-ctf-repo": "Repositorio de Código",
+      "proj-ctf-live": "Plataforma en Vivo",
+
+      "education-heading": "04 / Educación y Certificaciones",
+      "edu-dut-title": "DUT en Ciberseguridad",
+      "edu-dut-school": "EST Tetuán, Marruecos — 2025 - Presente",
+      "edu-dut-desc": "Cursos clave: Redes y Seguridad (OSI/TCP-IP, Firewalls, VPN, IDS/IPS), Windows Server (AD, GPO), Python, C, SQL.",
+      "edu-bac-title": "Baccalauréat en Ciencias Físicas",
+      "edu-bac-school": "Lycée Abdelkhalek Torres, Tetuán — Mención Bien (opción francesa/bilingüe)",
+      
+      "certs-title": "Certificaciones de la Industria",
+      "cert-1-title": "Primeros pasos con Cisco Packet Tracer",
+      "cert-1-issuer": "Cisco Networking Academy — Mayo 2026",
+      "cert-2-title": "Introducción a la Ciberseguridad",
+      "cert-2-issuer": "Cisco Networking Academy — Abril 2026",
+      "cert-3-title": "Fundamentos de la Ciberseguridad",
+      "cert-3-issuer": "Google / Coursera — Abril 2026",
+
+      "ctf-heading": "Competiciones de CTF",
+      "ctf-ensi-desc": "ENSI 2K26 CTF (Cyberspace x ENSI) — 11 Flags resueltos (Mayo 2026)",
+      "ctf-nsec-desc": "NorthSec 2026 — 6 Flags resueltos (Abril 2026)",
+      "ctf-morocco-spain-desc": "Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 Flags resueltos (Equipo ANARCHOTECH) (Mayo 2026)",
+      "ctf-skills-desc": "Competencias adquiridas: Análisis forense digital, explotación web, ingeniería inversa.",
+
+      "footer-desc": "Diseñado y desarrollado con absoluta discreción. Construido usando marcado estructural personalizado, capas de utilidad de Tailwind CSS y scripts ligeros en el lado del cliente. Desplegable instantáneamente en Vercel.",
+      
+      // Modal translations
+      "modal-title": "Canal de Briefing Seguro",
+      "modal-desc": "Seleccione su método preferido para establecer contacto. Puede copiar las credenciales o abrir su gestor de correo del sistema.",
+      "modal-copy": "Copiar",
+      "modal-call": "Llamar",
+      "modal-direct": "Aplicación de Correo por Defecto",
+      
+      // Project 4 & Guide translations
+      "proj-ctf-guide": "Guía de Despliegue",
+      "project-4-meta": "Proyecto Académico",
+      "project-4-title": "Arquitectura VPN Empresarial Segura",
+      "project-4-desc": "Diseñé y documenté una infraestructura VPN segura de sitio a sitio y de acceso remoto para entornos empresariales. Definí conjuntos estrictos de reglas de firewall, protocolos criptográficos (IPsec/OpenVPN) y listas de control de acceso (ACL) para garantizar la confidencialidad de los datos y operaciones remotas seguras.",
+      "proj-vpn-report": "Ver Informe de Arquitectura",
+
+      // Project 5 translations
+      "project-5-meta": "Laboratorio Personal",
+      "project-5-title": "CyberSec Active Directory Commander",
+      "project-5-desc": "Desarrollé una suite de administración de escritorio de nivel empresarial en Python utilizando protocolos LDAP/LDAPS para administrar y auditar objetos de Active Directory. Implementé operaciones por lotes (activación/desactivación/eliminación masiva), representación interactiva de la estructura de OU, árboles de membresía de grupos de seguridad y registro de auditoría localizado para el cumplimiento de SIEM.",
+      "proj-ad-repo": "Repositorio de Código"
     }
   };
 
@@ -213,19 +324,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update active visual state on switcher buttons
     const btnEn = document.getElementById('lang-en');
     const btnFr = document.getElementById('lang-fr');
+    const btnEs = document.getElementById('lang-es');
+
+    if (btnEn) btnEn.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
+    if (btnFr) btnFr.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
+    if (btnEs) btnEs.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
 
     if (lang === 'en') {
-      btnEn.classList.add('text-cream', 'bg-navy/40');
-      btnEn.classList.remove('text-slate');
-      btnFr.classList.add('text-slate');
-      btnFr.classList.remove('text-cream', 'bg-navy/40');
-    } else {
-      btnFr.classList.add('text-cream', 'bg-navy/40');
-      btnFr.classList.remove('text-slate');
-      btnEn.classList.add('text-slate');
-      btnEn.classList.remove('text-cream', 'bg-navy/40');
+      if (btnEn) btnEn.classList.add('text-cream', 'bg-navy/40');
+      if (btnFr) btnFr.classList.add('text-slate');
+      if (btnEs) btnEs.classList.add('text-slate');
+    } else if (lang === 'fr') {
+      if (btnFr) btnFr.classList.add('text-cream', 'bg-navy/40');
+      if (btnEn) btnEn.classList.add('text-slate');
+      if (btnEs) btnEs.classList.add('text-slate');
+    } else if (lang === 'es') {
+      if (btnEs) btnEs.classList.add('text-cream', 'bg-navy/40');
+      if (btnEn) btnEn.classList.add('text-slate');
+      if (btnFr) btnFr.classList.add('text-slate');
     }
-
     // Set document lang attribute
     document.documentElement.setAttribute('lang', lang);
 
@@ -239,11 +356,64 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Switcher Click Listeners
-  document.getElementById('lang-en').addEventListener('click', () => updateLanguage('en'));
-  document.getElementById('lang-fr').addEventListener('click', () => updateLanguage('fr'));
+  if (document.getElementById('lang-en')) document.getElementById('lang-en').addEventListener('click', () => updateLanguage('en'));
+  if (document.getElementById('lang-fr')) document.getElementById('lang-fr').addEventListener('click', () => updateLanguage('fr'));
+  if (document.getElementById('lang-es')) document.getElementById('lang-es').addEventListener('click', () => updateLanguage('es'));
 
   // Initialize Language
   updateLanguage(currentLang);
+
+  // 3. tsParticles Integration
+  function setupParticlesBackground() {
+    if (typeof tsParticles !== 'undefined') {
+      tsParticles.load("tsparticles", {
+        particles: {
+          links: {
+            enable: true,
+            distance: 120,
+            opacity: 0.12,
+            color: "#f5f2eb",
+          },
+          number: {
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+            value: 45,
+          },
+          size: {
+            value: 1.5,
+          },
+          move: {
+            direction: "none",
+            enable: true,
+            outMode: "bounce",
+            random: false,
+            speed: 1.2,
+            straight: false,
+          },
+          opacity: {
+            value: 0.25,
+          },
+          color: {
+            value: "#f5f2eb",
+          },
+          shape: {
+            type: "circle",
+          },
+        },
+        retina_detect: true,
+      });
+    }
+  }
+
+  if (document.getElementById('tsparticles')) {
+    const particlesScript = document.createElement("script");
+    particlesScript.src = "https://cdn.jsdelivr.net/npm/tsparticles-preset-links@2.12.0/tsparticles.preset.links.bundle.min.js";
+    particlesScript.onload = setupParticlesBackground;
+    document.body.appendChild(particlesScript);
+  }
+
 
   // 3. Mouse Spotlight Effect (Desktop only)
   const spotlight = document.querySelector('.spotlight');

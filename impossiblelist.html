@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impossible List | Issam Echahbouni</title>
+  <meta name="description" content="The Impossible List of Issam Echahbouni: a living document of personal and technical cybersecurity milestones.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            charcoal: {
+              DEFAULT: '#0a0b0c',
+              light: '#121315',
+              lighter: '#1a1c1e',
+            },
+            cream: {
+              DEFAULT: '#f5f2eb',
+              muted: '#d5d1c9',
+            },
+            slate: {
+              DEFAULT: '#8f97a3',
+              muted: '#575f6b',
+            },
+            navy: {
+              DEFAULT: '#152238',
+              light: '#1e2f4a',
+              dark: '#0d1524',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    body {
+      background-color: #0a0b0c;
+    }
+    .il-done {
+      text-decoration: line-through;
+      opacity: 0.55;
+    }
+    .il-date {
+      font-style: italic;
+      font-size: 0.75rem;
+      color: rgba(245, 242, 235, 0.45);
+      margin-left: 0.5rem;
+      text-decoration: none;
+      display: inline;
+    }
+  </style>
+</head>
+<body class="bg-charcoal text-slate font-sans selection:bg-navy selection:text-cream leading-relaxed antialiased min-h-screen relative">
+
+  <!-- Radial Background Spotlight Effect -->
+  <div class="spotlight" id="bg-spotlight"></div>
+
+  <!-- Interactive Particles Background -->
+  <div id="tsparticles" class="fixed inset-0 -z-10 pointer-events-none opacity-20"></div>
+
+  <!-- Language Switcher Control -->
+  <div class="fixed top-6 right-6 z-50 flex items-center bg-charcoal-light/80 border border-cream/5 px-1.5 py-1 rounded-full text-xs font-semibold backdrop-blur tracking-wider shadow-lg">
+    <button id="lang-en" class="px-3 py-1 rounded-full transition-all text-cream focus:outline-none">EN</button>
+    <span class="text-slate/20 select-none">|</span>
+    <button id="lang-fr" class="px-3 py-1 rounded-full transition-all text-slate focus:outline-none">FR</button>
+    <span class="text-slate/20 select-none">|</span>
+    <button id="lang-es" class="px-3 py-1 rounded-full transition-all text-slate focus:outline-none">ES</button>
+  </div>
+
+  <!-- Main Container -->
+  <div class="max-w-3xl mx-auto px-6 py-16 md:py-24 relative z-10">
+    
+    <!-- Header link back -->
+    <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-cream hover:text-cream/80 transition-colors uppercase tracking-wider mb-12 focus:outline-none">
+      <span data-i18n="back-home">← Back to Portfolio</span>
+    </a>
+
+    <!-- Splash Titles -->
+    <div class="mb-12 border-b border-cream/5 pb-10">
+      <h1 data-i18n="title-main" class="font-serif text-4xl md:text-5xl font-medium tracking-tight text-cream">
+        The Impossible List
+      </h1>
+      <h2 data-i18n="subtitle-main" class="mt-2 font-sans text-xs md:text-sm font-semibold tracking-widest text-cream/70 uppercase">
+        by Issam Echahbouni
+      </h2>
+      
+      <div class="mt-8 space-y-4 text-slate text-sm leading-relaxed max-w-2xl">
+        <p data-i18n="intro-p1">
+          You might be wondering what an impossible list is. Unlike a bucket list, it is an ever-evolving document of goals that grows as you grow. As soon as you cross something off, you add new milestones. It is meant to be a roadmap of continuous personal and technical evolution.
+        </p>
+        <p data-i18n="intro-p2">
+          I keep this list public to maintain accountability, push my boundaries in cybersecurity, and inspire others to construct their own.
+        </p>
+      </div>
+    </div>
+
+    <!-- Goals Sections -->
+    <div class="space-y-12">
+      
+      <!-- Section: Cybersecurity -->
+      <section class="space-y-4">
+        <h3 data-i18n="sec-cyber" class="font-serif text-2xl text-cream font-medium border-b border-cream/5 pb-2">
+          Cybersecurity & Certifications
+        </h3>
+        <ul class="space-y-3.5 pl-5 list-disc text-sm font-medium text-slate">
+          <li class="il-done">
+            <span data-i18n="cyber-1">Obtain Google/Cisco Cybersecurity Foundations</span>
+            <span class="il-date">April 2026</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="cyber-2">Obtain eJPT (Junior Penetration Tester) certification</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="cyber-3">Obtain OSCP (Offensive Security Certified Professional)</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="cyber-4">Deploy a complete automated malware analysis sandbox lab</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="cyber-5">Reach top 1% in Hack The Box / TryHackMe</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="cyber-6">Publish and register a CVE (Vulnerability disclosure)</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section: Technology & Labs -->
+      <section class="space-y-4">
+        <h3 data-i18n="sec-tech" class="font-serif text-2xl text-cream font-medium border-b border-cream/5 pb-2">
+          Technology & Home Labs
+        </h3>
+        <ul class="space-y-3.5 pl-5 list-disc text-sm font-medium text-slate">
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="tech-1">Deploy custom SNORT IPS rule-sets in NFQ mode on a personal router</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="tech-2">Build a multi-agent Zabbix monitoring server for local system supervision</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="tech-3">Develop a custom Python-based active network auditing tool</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section: Academic & Career -->
+      <section class="space-y-4">
+        <h3 data-i18n="sec-academic" class="font-serif text-2xl text-cream font-medium border-b border-cream/5 pb-2">
+          Academic & Career
+        </h3>
+        <ul class="space-y-3.5 pl-5 list-disc text-sm font-medium text-slate">
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="academic-1">Graduate from EST Tétouan with top honors</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="academic-2">Secure a late 2026 practical cybersecurity initiation internship</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="academic-3">Obtain an engineering degree in network security and auditing</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section: Personal & Travelling -->
+      <section class="space-y-4">
+        <h3 data-i18n="sec-life" class="font-serif text-2xl text-cream font-medium border-b border-cream/5 pb-2">
+          Personal & Traveling
+        </h3>
+        <ul class="space-y-3.5 pl-5 list-disc text-sm font-medium text-slate">
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="life-1">Travel to Spain & establish regional security contacts</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="life-2">Build a home server rack for continuous virtualization simulations</span>
+          </li>
+          <li class="hover:text-cream transition-colors">
+            <span data-i18n="life-3">Develop a technical blog to document writeups and lab setups</span>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 pt-8 border-t border-cream/5 text-center text-[10px] text-slate-muted/40 font-medium tracking-wide uppercase">
+      <p data-i18n="sec-copyright">
+        © 2026 Issam Echahbouni. All security parameters protected under operational copyright.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Translation & Interactive particles script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Translations
+      const translations = {
+        en: {
+          "title-main": "The Impossible List",
+          "subtitle-main": "by Issam Echahbouni",
+          "intro-p1": "You might be wondering what an impossible list is. Unlike a bucket list, it is an ever-evolving document of goals that grows as you grow. As soon as you cross something off, you add new milestones. It is meant to be a roadmap of continuous personal and technical evolution.",
+          "intro-p2": "I keep this list public to maintain accountability, push my boundaries in cybersecurity, and inspire others to construct their own.",
+          "back-home": "← Back to Portfolio",
+          "sec-cyber": "Cybersecurity & Certifications",
+          "cyber-1": "Obtain Google/Cisco Cybersecurity Foundations",
+          "cyber-2": "Obtain eJPT (Junior Penetration Tester) certification",
+          "cyber-3": "Obtain OSCP (Offensive Security Certified Professional)",
+          "cyber-4": "Deploy a complete automated malware analysis sandbox lab",
+          "cyber-5": "Reach top 1% in Hack The Box / TryHackMe",
+          "cyber-6": "Publish and register a CVE (Vulnerability disclosure)",
+          "sec-tech": "Technology & Home Labs",
+          "tech-1": "Deploy custom SNORT IPS rule-sets in NFQ mode on a personal router",
+          "tech-2": "Build a multi-agent Zabbix monitoring server for local system supervision",
+          "tech-3": "Develop a custom Python-based active network auditing tool",
+          "sec-academic": "Academic & Career",
+          "academic-1": "Graduate from EST Tétouan with top honors",
+          "academic-2": "Secure a late 2026 practical cybersecurity initiation internship",
+          "academic-3": "Obtain an engineering degree in network security and auditing",
+          "sec-life": "Personal & Traveling",
+          "life-1": "Travel to Spain & establish regional security contacts",
+          "life-2": "Build a home server rack for continuous virtualization simulations",
+          "life-3": "Develop a technical blog to document writeups and lab setups",
+          "sec-copyright": "© 2026 Issam Echahbouni. All security parameters protected under operational copyright."
+        },
+        fr: {
+          "title-main": "La Liste Impossible",
+          "subtitle-main": "par Issam Echahbouni",
+          "intro-p1": "Vous vous demandez peut-être ce qu'est une liste impossible. Contrairement à une simple liste de souhaits, c'est un document en constante évolution qui grandit avec vous. Dès qu'un objectif est atteint, de nouveaux défis sont ajoutés. C'est une feuille de route pour une progression continue.",
+          "intro-p2": "Je rends cette liste publique pour rester motivé, repousser mes limites en cybersécurité et inspirer d'autres à créer la leur.",
+          "back-home": "← Retour au Portfolio",
+          "sec-cyber": "Cybersécurité & Certifications",
+          "cyber-1": "Obtenir les certifications Cisco/Google Foundations",
+          "cyber-2": "Obtenir la certification eJPT (Junior Penetration Tester)",
+          "cyber-3": "Obtenir l'OSCP (Offensive Security Certified Professional)",
+          "cyber-4": "Déployer un laboratoire d'analyse automatisée de malwares",
+          "cyber-5": "Atteindre le top 1% sur Hack The Box / TryHackMe",
+          "cyber-6": "Trouver et publier une CVE (divulgation de vulnérabilité)",
+          "sec-tech": "Technologie & Laboratoires",
+          "tech-1": "Déployer des règles SNORT IPS personnalisées (NFQ) sur un routeur physique",
+          "tech-2": "Construire un serveur Zabbix multi-agents pour la supervision système",
+          "tech-3": "Développer un scanner de ports et d'audit réseau personnalisé en Python",
+          "sec-academic": "Académique & Carrière",
+          "academic-1": "Diplômé de l'EST Tétouan avec mention",
+          "academic-2": "Décrocher un stage d'initiation en cybersécurité pour fin 2026",
+          "academic-3": "Poursuivre un cycle d'ingénieur en sécurité des réseaux et audits",
+          "sec-life": "Personnel & Voyages",
+          "life-1": "Voyager en Espagne & établir des contacts professionnels",
+          "life-2": "Assembler un serveur rack domestique pour les simulations virtuelles",
+          "life-3": "Lancer un blog technique pour documenter mes rapports de TP et labs",
+          "sec-copyright": "© 2026 Issam Echahbouni. Tous paramètres de sécurité protégés sous copyright opérationnel."
+        },
+        es: {
+          "title-main": "La Lista Imposible",
+          "subtitle-main": "por Issam Echahbouni",
+          "intro-p1": "¿Te preguntarás qué es una lista imposible? A diferencia de una lista de deseos, es un documento en constante evolución que crece contigo. Tan pronto como logras un objetivo, añades nuevos hitos. Es una hoja de ruta para una evolución personal y técnica continua.",
+          "intro-p2": "Mantengo esta lista pública para rendir cuentas, superar mis límites en ciberseguridad e inspirar a otros a construir la suya propia.",
+          "back-home": "← Volver al Portafolio",
+          "sec-cyber": "Ciberseguridad y Certificaciones",
+          "cyber-1": "Obtener las certificaciones de Cisco/Google Foundations",
+          "cyber-2": "Obtener la certificación eJPT (Junior Penetration Tester)",
+          "cyber-3": "Obtener la certificación OSCP (Offensive Security Certified Professional)",
+          "cyber-4": "Desplegar un laboratorio automatizado de análisis de malware",
+          "cyber-5": "Alcanzar el top 1% en Hack The Box / TryHackMe",
+          "cyber-6": "Publicar y registrar una CVE (divulgación de vulnerabilidades)",
+          "sec-tech": "Tecnología y Laboratorios Domésticos",
+          "tech-1": "Desplegar reglas personalizadas de SNORT IPS (modo NFQ) en un enrutador local",
+          "tech-2": "Construir un servidor Zabbix multiagente para supervisión de sistemas locales",
+          "tech-3": "Desarrollar una herramienta de auditoría de red activa en Python",
+          "sec-academic": "Académico y Profesional",
+          "academic-1": "Graduarme de EST Tetuán con honores",
+          "academic-2": "Asegurar unas prácticas de iniciación en ciberseguridad a finales de 2026",
+          "academic-3": "Obtener un título de ingeniería en seguridad de redes y auditorías",
+          "sec-life": "Personal y Viajes",
+          "life-1": "Viajar a España y establecer contactos regionales en seguridad",
+          "life-2": "Construir un rack de servidores en casa para simulaciones virtuales continuas",
+          "life-3": "Desarrollar un blog técnico para documentar writeups y laboratorios",
+          "sec-copyright": "© 2026 Issam Echahbouni. Todos los parámetros de seguridad protegidos bajo derecho de autor operacional."
+        }
+      };
+
+      // 2. Switcher Logic
+      let currentLang = localStorage.getItem('portfolio-lang') || 'en';
+
+      const updateLanguage = (lang) => {
+        currentLang = lang;
+        localStorage.setItem('portfolio-lang', lang);
+
+        const btnEn = document.getElementById('lang-en');
+        const btnFr = document.getElementById('lang-fr');
+        const btnEs = document.getElementById('lang-es');
+
+        if (btnEn) btnEn.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
+        if (btnFr) btnFr.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
+        if (btnEs) btnEs.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
+
+        if (lang === 'en') {
+          if (btnEn) btnEn.classList.add('text-cream', 'bg-navy/40');
+          if (btnFr) btnFr.classList.add('text-slate');
+          if (btnEs) btnEs.classList.add('text-slate');
+        } else if (lang === 'fr') {
+          if (btnFr) btnFr.classList.add('text-cream', 'bg-navy/40');
+          if (btnEn) btnEn.classList.add('text-slate');
+          if (btnEs) btnEs.classList.add('text-slate');
+        } else if (lang === 'es') {
+          if (btnEs) btnEs.classList.add('text-cream', 'bg-navy/40');
+          if (btnEn) btnEn.classList.add('text-slate');
+          if (btnFr) btnFr.classList.add('text-slate');
+        }
+
+        document.documentElement.setAttribute('lang', lang);
+
+        document.querySelectorAll('[data-i18n]').forEach((element) => {
+          const key = element.getAttribute('data-i18n');
+          if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+          }
+        });
+      };
+
+      document.getElementById('lang-en').addEventListener('click', () => updateLanguage('en'));
+      document.getElementById('lang-fr').addEventListener('click', () => updateLanguage('fr'));
+      document.getElementById('lang-es').addEventListener('click', () => updateLanguage('es'));
+
+      updateLanguage(currentLang);
+
+      // 3. Spotlight Mouse effect
+      const spotlight = document.getElementById('bg-spotlight');
+      if (spotlight) {
+        window.addEventListener('mousemove', (e) => {
+          spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+          spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+      }
+
+      // 4. tsParticles Background Loader
+      function setupParticlesBackground() {
+        if (typeof tsParticles !== 'undefined') {
+          tsParticles.load("tsparticles", {
+            particles: {
+              links: {
+                enable: true,
+                distance: 120,
+                opacity: 0.12,
+                color: "#f5f2eb",
+              },
+              number: {
+                density: {
+                  enable: true,
+                  value_area: 800,
+                },
+                value: 45,
+              },
+              size: {
+                value: 1.5,
+              },
+              move: {
+                direction: "none",
+                enable: true,
+                outMode: "bounce",
+                random: false,
+                speed: 1.2,
+                straight: false,
+              },
+              opacity: {
+                value: 0.25,
+              },
+              color: {
+                value: "#f5f2eb",
+              },
+              shape: {
+                type: "circle",
+              },
+            },
+            retina_detect: true,
+          });
+        }
+      }
+
+      const particlesScript = document.createElement("script");
+      particlesScript.src = "https://cdn.jsdelivr.net/npm/tsparticles-preset-links@2.12.0/tsparticles.preset.links.bundle.min.js";
+      particlesScript.onload = setupParticlesBackground;
+      document.body.appendChild(particlesScript);
+    });
+  </script>
+</body>
+</html>

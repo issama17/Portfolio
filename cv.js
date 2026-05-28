@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "edu-bac-desc": "French option, Mention Bien",
 
       "sec-projects": "Academic & Lab Projects",
-      "proj-wazuh-title": "Wazuh SIEM & Suricata NIDS Architecture",
+      "proj-wazuh-title": "Wazuh SIEM & Suricata NIDS Integration",
       "proj-wazuh-meta": "Academic Project",
       "proj-wazuh-l1": "• Deployed a full Wazuh SIEM architecture (Manager + Agents) with Suricata NIDS integration for EVE JSON alert analysis.",
       "proj-wazuh-l2": "• Conducted simulated Red Team campaigns: Nmap scans, Hydra brute force (SSH/FTP/RDP), SQLMap injections, and hping3 SYN flood from Kali Linux.",
@@ -194,6 +194,103 @@ document.addEventListener('DOMContentLoaded', () => {
       "proj-ad-l1": "• Conception et audit d'une infrastructure de tunnels VPN site-à-site et d'accès distant sécurisée avec IPsec et OpenVPN.",
       "proj-ad-l2": "• Configuration de pare-feux réseau, de politiques de sécurité personnalisées, de protocoles de routage et de listes de contrôle d'accès (ACL).",
       "proj-ad-repo": "Dépôt de Code"
+    },
+    es: {
+      "toolbar-back": "← Volver al Portafolio",
+      "toolbar-print": "Imprimir CV",
+      "toolbar-download": "Descargar PDF",
+      "cv-title": "Estudiante de Ciberseguridad",
+      "cv-subtitle": "Prácticas de Iniciación finales 2026",
+      "cv-location": "M'diq, Marruecos (Tetuán / Tánger)",
+      
+      "sec-profile": "Perfil Profesional",
+      "profile-desc": "Estudiante de primer año de DUT Ciberseguridad en EST Tetuán, apasionado por la detección de amenazas y la seguridad de infraestructuras de red. Experiencia práctica en laboratorio en el despliegue de SIEM/NIDS (Wazuh, Suricata, Snort) y simulaciones de Red Team. Jugador activo de CTF. Disponible para prácticas de iniciación a finales de 2026.",
+
+      "sec-education": "Educación",
+      "edu-dut-title": "DUT en Ciberseguridad",
+      "edu-dut-school": "EST Tetuán, Marruecos — 2025 - Presente",
+      "edu-dut-courses": "Cursos clave: Redes y Seguridad (OSI/TCP-IP, Firewalls, VPN, IDS/IPS), Windows Server (AD, GPO), Python, C, SQL",
+      "edu-bac-title": "Baccalauréat en Ciencias Físicas",
+      "edu-bac-school": "Lycée Abdelkhalek Torres, Tetuán — 2025",
+      "edu-bac-desc": "Opción francesa, Mención Bien",
+
+      "sec-projects": "Proyectos Académicos y de Laboratorio",
+      "proj-wazuh-title": "Arquitectura de Wazuh SIEM y Suricata NIDS",
+      "proj-wazuh-meta": "Proyecto Académico",
+      "proj-wazuh-l1": "• Desplegué una arquitectura Wazuh completa (Manager + Agentes) con integración de Suricata NIDS para el análisis de alertas EVE JSON.",
+      "proj-wazuh-l2": "• Realicé campañas de Red Team simuladas: scans Nmap, fuerza bruta SSH/FTP/RDP (Hydra), inyecciones SQL (SQLMap) y DoS SYN flood (hping3) desde Kali Linux.",
+      "proj-wazuh-l3": "• Correlacioné y analicé eventos de seguridad para validar reglas de detección y cobertura.",
+      "proj-wazuh-report": "Ver Informe de Proyecto",
+      
+      "proj-snort-title": "Implementación de Snort IDS/IPS",
+      "proj-snort-meta": "Laboratorio Personal",
+      "proj-snort-l1": "• Instalé Snort 3 y desarrollé reglas personalizadas para la detección de anomalías ICMP, fuerza bruta SSH y escaneos SYN con Nmap.",
+      "proj-snort-l2": "• Configuré Snort en modo IPS en línea (NFQ) para bloqueo activo de amenazas, probándolo contra vectores de inyección SQL.",
+      "proj-snort-presentation": "Ver Presentación",
+      "proj-snort-report": "Ver Informe de Laboratorio",
+
+      "proj-ctf-title": "Plataforma CTF - Capture The Flag",
+      "proj-ctf-meta": "Proyecto Académico",
+      "proj-ctf-l1": "• Desarrollé y desplegué una plataforma web CTF funcional en Python (POO), alojada en producción en Railway.",
+      "proj-ctf-repo": "Repositorio de Código",
+      "proj-ctf-live": "Plataforma en Vivo",
+
+      "sec-certifications": "Certificaciones de la Industria",
+      "cert-cisco-packet": "Primeros pasos con Cisco Packet Tracer — Cisco Networking Academy (Mayo 2026)",
+      "cert-cisco-intro": "Introducción a la Ciberseguridad — Cisco Networking Academy (Abril 2026)",
+      "cert-google": "Fundamentos de la Ciberseguridad — Google / Coursera (Abril 2026)",
+
+      "sec-ctf": "Competiciones de CTF y Logros",
+      "ctf-ensi": "• ENSI 2K26 CTF (Cyberspace x ENSI) — 11 flags validados (Mayo 2026)",
+      "ctf-nsec": "• NorthSec 2026 — 6 flags validados (Abril 2026)",
+      "ctf-morocco-spain": "• Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 flags validados (Equipo ANARCHOTECH) (Mayo 2026)",
+      "ctf-skills-title": "Habilidades Adquiridas:",
+      "ctf-skills-desc": "Análisis forense digital, explotación web, ingeniería inversa",
+
+      "sec-skills": "Habilidades Técnicas",
+      "skills-secops": "Seguridad y SIEM",
+      "skills-offensive": "Herramientas Ofensivas",
+      "skills-systems": "Sistemas",
+      "skills-languages": "Idiomas y Scripting",
+      "skills-virtual": "Virtualización",
+
+      "sec-languages": "Idiomas",
+      "lang-arabic": "Árabe: Nativo",
+      "lang-french": "Francés: Fluido",
+      "lang-english": "Inglés: Técnico / Operacional",
+
+      "sec-soft-skills": "Habilidades Blandas",
+      "soft-1": "• Mente analítica y resolución de problemas",
+      "soft-2": "• Trabajo en equipo (simulaciones Red/Blue Team)",
+      "soft-3": "• Autonomía y curiosidad técnica",
+
+      "sec-interests": "Intereses",
+      "interest-1": "• Culturismo (disciplina y fuerza)",
+      "interest-2": "• Juegos de simulación y conducción (Forza, ETS2)",
+
+      "sec-copyright": "© 2026 Issam Echahbouni. Todos los parámetros de seguridad y credenciales protegidos bajo derecho de autor operacional.",
+
+      // Modal translations
+      "modal-title": "Canal de Briefing Seguro",
+      "modal-desc": "Seleccione su método preferido para establecer contacto. Puede copiar las credenciales o abrir su gestor de correo.",
+      "modal-copy": "Copiar",
+      "modal-call": "Llamar",
+      "modal-direct": "Aplicación de Correo por Defecto",
+      
+      // Project 4 & Guide translations
+      "proj-ctf-guide": "Guía de Despliegue",
+      "project-4-meta": "Proyecto Académico",
+      "project-4-title": "Arquitectura VPN Empresarial Segura",
+      "proj-vpn-l1": "• Diseñé y audité una infraestructura de túneles VPN segura de sitio a sitio y de acceso remoto usando IPsec y OpenVPN.",
+      "proj-vpn-l2": "• Configuré firewalls de red, políticas de seguridad personalizadas, enrutamiento y listas de control de acceso (ACL).",
+      "proj-vpn-report": "Ver Informe de Arquitectura",
+
+      // Project 5 translations
+      "project-5-meta": "Laboratorio Personal",
+      "project-5-title": "CyberSec Active Directory Commander",
+      "proj-ad-l1": "• Desarrollé una suite de administración de escritorio de nivel empresarial en Python utilizando protocolos LDAP/LDAPS.",
+      "proj-ad-l2": "• Implementé operaciones por lotes, mapeo de membresía de grupos y registro de auditoría local para cumplimiento.",
+      "proj-ad-repo": "Repositorio de Código"
     }
   };
 
@@ -207,17 +304,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Visual active states on buttons
     const btnEn = document.getElementById('lang-en');
     const btnFr = document.getElementById('lang-fr');
+    const btnEs = document.getElementById('lang-es');
+
+    if (btnEn) btnEn.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
+    if (btnFr) btnFr.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
+    if (btnEs) btnEs.classList.remove('text-cream', 'bg-navy/40', 'text-slate');
 
     if (lang === 'en') {
-      btnEn.classList.add('text-cream', 'bg-navy/40');
-      btnEn.classList.remove('text-slate');
-      btnFr.classList.add('text-slate');
-      btnFr.classList.remove('text-cream', 'bg-navy/40');
-    } else {
-      btnFr.classList.add('text-cream', 'bg-navy/40');
-      btnFr.classList.remove('text-slate');
-      btnEn.classList.add('text-slate');
-      btnEn.classList.remove('text-cream', 'bg-navy/40');
+      if (btnEn) btnEn.classList.add('text-cream', 'bg-navy/40');
+      if (btnFr) btnFr.classList.add('text-slate');
+      if (btnEs) btnEs.classList.add('text-slate');
+    } else if (lang === 'fr') {
+      if (btnFr) btnFr.classList.add('text-cream', 'bg-navy/40');
+      if (btnEn) btnEn.classList.add('text-slate');
+      if (btnEs) btnEs.classList.add('text-slate');
+    } else if (lang === 'es') {
+      if (btnEs) btnEs.classList.add('text-cream', 'bg-navy/40');
+      if (btnEn) btnEn.classList.add('text-slate');
+      if (btnFr) btnFr.classList.add('text-slate');
     }
 
     document.documentElement.setAttribute('lang', lang);
@@ -232,8 +336,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Language Event Listeners
-  document.getElementById('lang-en').addEventListener('click', () => updateLanguage('en'));
-  document.getElementById('lang-fr').addEventListener('click', () => updateLanguage('fr'));
+  if (document.getElementById('lang-en')) document.getElementById('lang-en').addEventListener('click', () => updateLanguage('en'));
+  if (document.getElementById('lang-fr')) document.getElementById('lang-fr').addEventListener('click', () => updateLanguage('fr'));
+  if (document.getElementById('lang-es')) document.getElementById('lang-es').addEventListener('click', () => updateLanguage('es'));
 
   // Initialize Language
   updateLanguage(currentLang);
