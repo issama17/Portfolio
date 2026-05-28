@@ -88,7 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "project-4-title": "Secure Enterprise VPN Architecture",
       "proj-vpn-l1": "• Designed and audited a secure site-to-site and remote-access VPN tunnel infrastructure using IPsec and OpenVPN.",
       "proj-vpn-l2": "• Configured network firewalls, custom security policies, routing protocols, and access control lists (ACLs) to protect corporate resources.",
-      "proj-vpn-report": "View Architecture Report"
+      "proj-vpn-report": "View Architecture Report",
+
+      // Project 5 translations
+      "project-5-meta": "Personal Lab",
+      "project-5-title": "CyberSec Active Directory Commander",
+      "proj-ad-l1": "• Engineered an enterprise-grade desktop administration suite in Python with LDAP/LDAPS support.",
+      "proj-ad-l2": "• Implemented batch account lifecycle actions, nested group membership mapping, and local audit logging for compliance.",
+      "proj-ad-repo": "Code Repository"
     },
     fr: {
       "toolbar-back": "← Retour au Portfolio",
@@ -177,7 +184,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "project-4-title": "Architecture VPN Sécurisée d'Entreprise",
       "proj-vpn-l1": "• Conception et audit d'une infrastructure de tunnels VPN site-à-site et d'accès distant sécurisée avec IPsec et OpenVPN.",
       "proj-vpn-l2": "• Configuration de pare-feux réseau, de politiques de sécurité personnalisées, de protocoles de routage et de listes de contrôle d'accès (ACL).",
-      "proj-vpn-report": "Voir le Rapport d'Architecture"
+      "proj-vpn-report": "Voir le Rapport d'Architecture",
+
+      // Project 5 translations
+      "project-5-meta": "Lab Personnel",
+      "project-5-title": "CyberSec Active Directory Commander",
+      "proj-ad-l1": "• Conception et audit d'une infrastructure de tunnels VPN site-à-site et d'accès distant sécurisée avec IPsec et OpenVPN.",
+      "proj-ad-l2": "• Configuration de pare-feux réseau, de politiques de sécurité personnalisées, de protocoles de routage et de listes de contrôle d'accès (ACL).",
+      "proj-ad-repo": "Dépôt de Code"
     }
   };
 

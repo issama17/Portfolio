@@ -92,7 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "project-4-meta": "Academic Project",
       "project-4-title": "Secure Enterprise VPN Architecture",
       "project-4-desc": "Designed and documented a secure site-to-site and remote-access VPN infrastructure for enterprise environments. Defined strict firewall rule sets, cryptographic protocols (IPsec/OpenVPN), and access control lists (ACLs) to ensure data confidentiality and secure remote operations.",
-      "proj-vpn-report": "View Architecture Report"
+      "proj-vpn-report": "View Architecture Report",
+
+      // Project 5 translations
+      "project-5-meta": "Personal Lab",
+      "project-5-title": "CyberSec Active Directory Commander",
+      "project-5-desc": "Engineered an enterprise-grade desktop administration suite in Python utilizing LDAP/LDAPS protocols to manage and audit Active Directory objects. Implemented batch operations (bulk enable/disable/delete), interactive OU structure rendering, security group membership trees, and localized audit logging for SIEM compliance.",
+      "proj-ad-repo": "Code Repository"
     },
     fr: {
       "hero-subtitle": "Cybersécurité & Infrastructure Réseau",
@@ -185,7 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "project-4-meta": "Projet Académique",
       "project-4-title": "Architecture VPN Sécurisée d'Entreprise",
       "project-4-desc": "Conception et documentation d'une infrastructure VPN site-à-site et d'accès distant sécurisée pour un environnement d'entreprise. Définition de pare-feux, de protocoles cryptographiques (IPsec/OpenVPN) et de listes de contrôle d'accès (ACL) pour garantir la confidentialité des flux.",
-      "proj-vpn-report": "Voir le Rapport d'Architecture"
+      "proj-vpn-report": "Voir le Rapport d'Architecture",
+
+      // Project 5 translations
+      "project-5-meta": "Lab Personnel",
+      "project-5-title": "CyberSec Active Directory Commander",
+      "project-5-desc": "Développement d'une suite d'administration de bureau de niveau entreprise en Python avec protocoles LDAP/LDAPS pour gérer et auditer les objets Active Directory. Intègre des opérations par lots (activation/désactivation/suppression en masse), une arborescence interactive des UOs et des journaux d'audit pour conformité SIEM.",
+      "proj-ad-repo": "Dépôt de Code"
     }
   };
 
