@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV | Issam Echahbouni</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            charcoal: {
+              DEFAULT: '#0a0b0c',
+              light: '#121315',
+              lighter: '#1a1c1e',
+            },
+            cream: {
+              DEFAULT: '#f5f2eb',
+              muted: '#d5d1c9',
+            },
+            slate: {
+              DEFAULT: '#8f97a3',
+              muted: '#575f6b',
+            },
+            navy: {
+              DEFAULT: '#152238',
+              light: '#1e2f4a',
+              dark: '#0d1524',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-charcoal: #0a0b0c;
+      --text-cream: #f5f2eb;
+      --text-slate: #8f97a3;
+      --border-subtle: rgba(245, 242, 235, 0.06);
+    }
+    
+    body {
+      background-color: var(--bg-charcoal);
+      color: var(--text-slate);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Print Overrides */
+    @media print {
+      body {
+        background: white !important;
+        color: #111111 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-sheet {
+        background: white !important;
+        color: #111111 !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+      .print-border {
+        border-color: #d1d5db !important;
+      }
+      .print-text-dark {
+        color: #0a0a0a !important;
+      }
+      .print-text-muted {
+        color: #4b5563 !important;
+      }
+      .print-bg-light {
+        background-color: #f9fafb !important;
+        border-color: #e5e7eb !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-charcoal text-slate font-sans selection:bg-navy selection:text-cream min-h-screen">
+
+  <!-- Top Action Toolbar (Hidden in Print) -->
+  <div class="no-print bg-charcoal-light/95 border-b border-cream/5 sticky top-0 z-50 backdrop-blur">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      
+      <!-- Back to Portfolio -->
+      <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-cream hover:text-cream/80 transition-colors uppercase tracking-wider focus:outline-none">
+        <span data-i18n="toolbar-back">← Back to Portfolio</span>
+      </a>
+
+      <!-- Actions & Language -->
+      <div class="flex items-center gap-4">
+        <!-- Lang Toggle -->
+        <div class="flex items-center bg-charcoal/80 border border-cream/5 px-1.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider">
+          <button id="lang-en" class="px-2.5 py-0.5 rounded-full transition-all text-cream focus:outline-none">EN</button>
+          <span class="text-slate/20 select-none">|</span>
+          <button id="lang-fr" class="px-2.5 py-0.5 rounded-full transition-all text-slate focus:outline-none">FR</button>
+        </div>
+
+        <span class="text-cream/5 select-none">|</span>
+
+        <!-- Print Action -->
+        <button onclick="window.print()" class="inline-flex items-center gap-1.5 text-xs font-semibold text-cream hover:text-cream/85 transition-colors uppercase tracking-wider focus:outline-none">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+          </svg>
+          <span data-i18n="toolbar-print">Print CV</span>
+        </button>
+
+        <!-- Direct Download Action -->
+        <a href="CV_Echahbouni_Issam.pdf" download class="inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal bg-cream hover:bg-cream/90 px-3.5 py-1.5 rounded transition-all uppercase tracking-wider focus:outline-none">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          <span data-i18n="toolbar-download">Download PDF</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CV Sheet Container -->
+  <div class="max-w-4xl mx-auto px-4 py-8 md:py-16">
+    <div class="print-sheet bg-[#0e1011] border border-cream/5 shadow-2xl rounded-lg p-8 md:p-12 transition-all">
+      
+      <!-- Top header: Name & Contact Details -->
+      <div class="print-border border-b border-cream/5 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h1 class="print-text-dark font-serif text-3xl md:text-4xl font-medium tracking-tight text-cream">
+            Issam Echahbouni
+          </h1>
+          <p class="print-text-muted mt-2 font-sans text-xs md:text-sm font-semibold tracking-wider text-cream/70 uppercase">
+            <span data-i18n="cv-title">Cybersecurity Student</span> — <span data-i18n="cv-subtitle">Initiation Internship late 2026</span>
+          </p>
+        </div>
+
+        <div class="print-text-muted text-xs text-right space-y-1 text-slate font-medium">
+          <p>📧 issam.echahbouni@etu.uae.ac.ma</p>
+          <p>📞 +212 675 23 40 46</p>
+          <p>🔗 linkedin.com/in/issam-echahbouni</p>
+          <p>📍 <span data-i18n="cv-location">M'diq, Morocco (Tétouan / Tanger)</span></p>
+        </div>
+      </div>
+
+      <!-- Main Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-8">
+        
+        <!-- Left Column: Sidebar details -->
+        <div class="space-y-8">
+          
+          <!-- Skills block -->
+          <div>
+            <h2 data-i18n="sec-skills" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Technical Skills
+            </h2>
+            <div class="space-y-4">
+              <div>
+                <h3 data-i18n="skills-secops" class="print-text-dark text-xs font-bold text-cream/80 uppercase tracking-wide">Security & SIEM</h3>
+                <p class="print-text-muted text-xs text-slate mt-1">Wazuh, Suricata, Snort, Zabbix</p>
+              </div>
+              <div>
+                <h3 data-i18n="skills-offensive" class="print-text-dark text-xs font-bold text-cream/80 uppercase tracking-wide">Offensive Tools</h3>
+                <p class="print-text-muted text-xs text-slate mt-1">Nmap, Hydra, Nikto, SQLMap, hping3</p>
+              </div>
+              <div>
+                <h3 data-i18n="skills-systems" class="print-text-dark text-xs font-bold text-cream/80 uppercase tracking-wide">Systems</h3>
+                <p class="print-text-muted text-xs text-slate mt-1">Kali Linux, Debian, Ubuntu, Windows Server</p>
+              </div>
+              <div>
+                <h3 data-i18n="skills-languages" class="print-text-dark text-xs font-bold text-cream/80 uppercase tracking-wide">Languages & Scripting</h3>
+                <p class="print-text-muted text-xs text-slate mt-1">Python (OOP, Scripting), C, SQL</p>
+              </div>
+              <div>
+                <h3 data-i18n="skills-virtual" class="print-text-dark text-xs font-bold text-cream/80 uppercase tracking-wide">Virtualization</h3>
+                <p class="print-text-muted text-xs text-slate mt-1">VMware, VirtualBox, Cisco Packet Tracer</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Languages block -->
+          <div>
+            <h2 data-i18n="sec-languages" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Languages
+            </h2>
+            <ul class="print-text-muted text-xs text-slate space-y-1.5 font-medium">
+              <li data-i18n="lang-arabic">Arabic: Native</li>
+              <li data-i18n="lang-french">French: Fluent</li>
+              <li data-i18n="lang-english">English: Technical / Operational</li>
+            </ul>
+          </div>
+
+          <!-- Soft Skills block -->
+          <div>
+            <h2 data-i18n="sec-soft-skills" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Soft Skills
+            </h2>
+            <ul class="print-text-muted text-xs text-slate space-y-1.5 font-medium">
+              <li data-i18n="soft-1">• Analytical Mind & Problem Solving</li>
+              <li data-i18n="soft-2">• Teamwork (Simulated Red/Blue Team)</li>
+              <li data-i18n="soft-3">• Autonomy & Technical Curiosity</li>
+            </ul>
+          </div>
+
+          <!-- Interests block -->
+          <div>
+            <h2 data-i18n="sec-interests" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Interests
+            </h2>
+            <ul class="print-text-muted text-xs text-slate space-y-1.5 font-medium">
+              <li data-i18n="interest-1">• Bodybuilding (Discipline & Strength)</li>
+              <li data-i18n="interest-2">• Simulation/Racing Games (Forza, ETS2)</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Professional Content details -->
+        <div class="md:col-span-2 space-y-8">
+          
+          <!-- Professional Summary -->
+          <div>
+            <h2 data-i18n="sec-profile" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Professional Profile
+            </h2>
+            <p data-i18n="profile-desc" class="print-text-muted text-xs md:text-sm text-slate leading-relaxed font-medium">
+              First-year DUT Cybersecurity student at EST Tétouan, passionate about threat detection and securing network infrastructures. Practical laboratory experience in deploying SIEM/NIDS (Wazuh, Suricata, Snort) and simulating Red Team campaigns. Active CTF player. Available for an initiation internship in late 2026.
+            </p>
+          </div>
+
+          <!-- Education -->
+          <div>
+            <h2 data-i18n="sec-education" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Education
+            </h2>
+            <div class="space-y-4">
+              <div>
+                <h3 data-i18n="edu-dut-title" class="print-text-dark text-sm font-bold text-cream">DUT in Cybersecurity</h3>
+                <p data-i18n="edu-dut-school" class="print-text-muted text-xs text-slate/75 mt-0.5">EST Tétouan, Morocco — 2025 - Present</p>
+                <p data-i18n="edu-dut-courses" class="print-text-muted text-xs text-slate/85 mt-1.5">Key Courses: Networks & Security (OSI/TCP-IP, Firewalls, VPN, IDS/IPS), Windows Server (AD, GPO), Python, C, SQL</p>
+              </div>
+              <div class="pt-2">
+                <h3 data-i18n="edu-bac-title" class="print-text-dark text-sm font-bold text-cream">Baccalauréat in Physical Sciences</h3>
+                <p data-i18n="edu-bac-school" class="print-text-muted text-xs text-slate/75 mt-0.5">Lycée Abdelkhalek Torres, Tétouan — 2025</p>
+                <p data-i18n="edu-bac-desc" class="print-text-muted text-xs text-slate/85 mt-1">French option, Mention Bien</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projects -->
+          <div>
+            <h2 data-i18n="sec-projects" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Academic & Lab Projects
+            </h2>
+            <div class="space-y-5">
+              
+              <!-- Project 1 -->
+              <div>
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 data-i18n="proj-wazuh-title" class="print-text-dark text-sm font-bold text-cream">Wazuh SIEM & Suricata NIDS Architecture</h3>
+                  <span data-i18n="proj-wazuh-meta" class="print-text-muted text-[10px] text-slate/50 font-semibold uppercase tracking-wider">Academic Project</span>
+                </div>
+                <div class="print-text-muted text-xs text-slate/80 mt-2 space-y-1">
+                  <p data-i18n="proj-wazuh-l1">• Deployed a full Wazuh SIEM architecture (Manager + Agents) with Suricata NIDS integration for EVE JSON alert analysis.</p>
+                  <p data-i18n="proj-wazuh-l2">• Conducted simulated Red Team campaigns: Nmap scans, Hydra brute force (SSH/FTP/RDP), SQLMap injections, and hping3 SYN flood from Kali Linux.</p>
+                  <p data-i18n="proj-wazuh-l3">• Correlated and analyzed security events to validate detection rules and coverage.</p>
+                </div>
+              </div>
+
+              <!-- Project 2 -->
+              <div>
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 data-i18n="proj-snort-title" class="print-text-dark text-sm font-bold text-cream">Snort IDS/IPS Implementation</h3>
+                  <span data-i18n="proj-snort-meta" class="print-text-muted text-[10px] text-slate/50 font-semibold uppercase tracking-wider">Personal Lab</span>
+                </div>
+                <div class="print-text-muted text-xs text-slate/80 mt-2 space-y-1">
+                  <p data-i18n="proj-snort-l1">• Installed Snort 3 and developed custom rules for ICMP anomaly detection, SSH brute force, and Nmap SYN scans.</p>
+                  <p data-i18n="proj-snort-l2">• Configured Snort in inline IPS mode (NFQ) for active threat blocking, testing it against SQL injection vectors.</p>
+                </div>
+              </div>
+
+              <!-- Project 3 -->
+              <div>
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 data-i18n="proj-ctf-title" class="print-text-dark text-sm font-bold text-cream">CTF Platform - Capture The Flag</h3>
+                  <span data-i18n="proj-ctf-meta" class="print-text-muted text-[10px] text-slate/50 font-semibold uppercase tracking-wider">Academic Project</span>
+                </div>
+                <div class="print-text-muted text-xs text-slate/80 mt-2 space-y-1">
+                  <p data-i18n="proj-ctf-l1">• Developed and deployed a functional web CTF platform built on object-oriented programming in Python. Hosted in production on Railway.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <div>
+            <h2 data-i18n="sec-certifications" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              Industry Certifications
+            </h2>
+            <ul class="print-text-muted text-xs text-slate space-y-2.5 font-medium">
+              <li data-i18n="cert-cisco-packet">• Getting Started with Cisco Packet Tracer — Cisco Networking Academy (May 2026)</li>
+              <li data-i18n="cert-cisco-intro">• Introduction to Cybersecurity — Cisco Networking Academy (April 2026)</li>
+              <li data-i18n="cert-google">• Foundations of Cybersecurity — Google / Coursera (April 2026)</li>
+            </ul>
+          </div>
+
+          <!-- CTF Achievements -->
+          <div>
+            <h2 data-i18n="sec-ctf" class="print-text-dark font-serif text-lg font-bold text-cream tracking-wide uppercase border-b border-cream/5 pb-2 mb-4">
+              CTF Competitions & Achievements
+            </h2>
+            <div class="space-y-2 text-xs text-slate font-medium">
+              <p data-i18n="ctf-ensi" class="print-text-muted">• ENSI 2K26 CTF (Cyberspace x ENSI) — 11 flags validated (May 2026)</p>
+              <p data-i18n="ctf-nsec" class="print-text-muted">• NorthSec 2026 — 6 flags validated (April 2026)</p>
+              <p class="print-text-muted mt-2 text-[11px] text-slate/60 italic pl-3">
+                <span data-i18n="ctf-skills-title" class="font-semibold">Acquired Skills:</span> <span data-i18n="ctf-skills-desc">Digital Forensics, Web Exploitation, Reverse Engineering</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Operational Copyright Notice at bottom of sheet -->
+      <div class="print-border border-t border-cream/5 pt-8 mt-12 text-center">
+        <p data-i18n="sec-copyright" class="print-text-muted text-[10px] uppercase tracking-wider text-slate-muted/40 font-semibold">
+          © 2026 Issam Echahbouni. All security parameters and credentials protected under operational copyright.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Load CV Scripts -->
+  <script src="cv.js"></script>
+</body>
+</html>

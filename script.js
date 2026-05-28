@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "nav-projects": "03 / Projects",
       "nav-education": "04 / Education & Certs",
 
-      "btn-download-resume": "Download Resume PDF",
+      "btn-download-resume": "View Curriculum Vitae",
       "btn-consultation": "Initiate Briefing",
 
       "about-heading": "01 / About",
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "nav-projects": "03 / Projets",
       "nav-education": "04 / Formation & Certifs",
 
-      "btn-download-resume": "Télécharger le CV PDF",
+      "btn-download-resume": "Voir le Curriculum Vitae",
       "btn-consultation": "Initier le Briefing",
 
       "about-heading": "01 / À Propos",
