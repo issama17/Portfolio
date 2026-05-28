@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-heading": "CTF Competitions",
       "ctf-ensi-desc": "ENSI 2K26 CTF (Cyberspace x ENSI) — 11 Flags solved (May 2026)",
       "ctf-nsec-desc": "NorthSec 2026 — 6 Flags solved (April 2026)",
+      "ctf-morocco-spain-desc": "Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 Flags solved (Team ANARCHOTECH) (May 2026)",
       "ctf-skills-desc": "Acreed Competencies: Digital Forensics, Web Exploitation, Reverse Engineering.",
 
       "footer-desc": "Designed & Engineered with absolute discretion. Built using custom structural markup, Tailwind CSS utility layers, and lightweight client-side scripts. Deployable instantly on Vercel.",
@@ -175,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-heading": "Compétitions CTF",
       "ctf-ensi-desc": "ENSI 2K26 CTF (Cyberspace x ENSI) — 11 flags validés (Mai 2026)",
       "ctf-nsec-desc": "NorthSec 2026 — 6 flags validés (Avril 2026)",
+      "ctf-morocco-spain-desc": "Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 flags validés (Équipe ANARCHOTECH) (Mai 2026)",
       "ctf-skills-desc": "Compétences acquises : Forensique numérique, exploitation web, reverse engineering.",
 
       "footer-desc": "Conçu & Développé avec discrétion. Construit à l'aide de balisage structurel personnalisé, de couches utilitaires Tailwind CSS et de scripts clients légers. Déployable instantanément sur Vercel.",

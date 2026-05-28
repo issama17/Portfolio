@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "sec-ctf": "CTF Competitions & Achievements",
       "ctf-ensi": "• ENSI 2K26 CTF (Cyberspace x ENSI) — 11 flags validated (May 2026)",
       "ctf-nsec": "• NorthSec 2026 — 6 flags validated (April 2026)",
+      "ctf-morocco-spain": "• Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 flags validated (Team ANARCHOTECH) (May 2026)",
       "ctf-skills-title": "Acquired Skills:",
       "ctf-skills-desc": "Digital Forensics, Web Exploitation, Reverse Engineering",
 
@@ -145,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "sec-ctf": "Compétitions CTF",
       "ctf-ensi": "• ENSI 2K26 CTF (Cyberspace x ENSI) — 11 flags validés (Mai 2026)",
       "ctf-nsec": "• NorthSec 2026 — 6 flags validés (Avril 2026)",
+      "ctf-morocco-spain": "• Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 flags validés (Team ANARCHOTECH) (Mai 2026)",
       "ctf-skills-title": "Compétences acquises :",
       "ctf-skills-desc": "Forensique numérique, exploitation web, reverse engineering",
 
