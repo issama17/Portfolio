@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Project 5 translations
       "project-5-meta": "Lab Personnel",
       "project-5-title": "CyberSec Active Directory Commander",
-      "proj-ad-l1": "• Conception et audit d'une infrastructure de tunnels VPN site-à-site et d'accès distant sécurisée avec IPsec et OpenVPN.",
-      "proj-ad-l2": "• Configuration de pare-feux réseau, de politiques de sécurité personnalisées, de protocoles de routage et de listes de contrôle d'accès (ACL).",
+      "proj-ad-l1": "• Développement d'une suite d'administration Active Directory d'entreprise en Python avec support LDAP/LDAPS.",
+      "proj-ad-l2": "• Implémentation d'actions en lot sur le cycle de vie des comptes, de cartographie des groupes imbriqués et de journalisation d'audit local pour la conformité SIEM.",
       "proj-ad-repo": "Dépôt de Code"
     },
     es: {
