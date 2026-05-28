@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "proj-wazuh-l1": "• Deployed a full Wazuh SIEM architecture (Manager + Agents) with Suricata NIDS integration for EVE JSON alert analysis.",
       "proj-wazuh-l2": "• Conducted simulated Red Team campaigns: Nmap scans, Hydra brute force (SSH/FTP/RDP), SQLMap injections, and hping3 SYN flood from Kali Linux.",
       "proj-wazuh-l3": "• Correlated and analyzed security events to validate detection rules and coverage.",
+      "proj-wazuh-report": "View Project Report",
       
       "proj-snort-title": "Snort IDS/IPS Implementation",
       "proj-snort-meta": "Personal Lab",
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "proj-wazuh-l1": "• Déployé une architecture Wazuh complète (Manager + Agents) avec intégration de Suricata NIDS pour l'analyse des alertes EVE JSON.",
       "proj-wazuh-l2": "• Campagnes Red Team simulées : scans Nmap, brute force SSH/FTP/RDP (Hydra), injections SQL (SQLMap), DoS SYN flood (hping3) depuis Kali Linux.",
       "proj-wazuh-l3": "• Corréler et analyser les événements de sécurité pour valider la couverture de détection et l'efficacité des règles.",
+      "proj-wazuh-report": "Voir le Rapport de Projet",
       
       "proj-snort-title": "Implémentation Snort IDS/IPS",
       "proj-snort-meta": "Lab Personnel",
