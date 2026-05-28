@@ -78,7 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-nsec-desc": "NorthSec 2026 — 6 Flags solved (April 2026)",
       "ctf-skills-desc": "Acreed Competencies: Digital Forensics, Web Exploitation, Reverse Engineering.",
 
-      "footer-desc": "Designed & Engineered with absolute discretion. Built using custom structural markup, Tailwind CSS utility layers, and lightweight client-side scripts. Deployable instantly on Vercel."
+      "footer-desc": "Designed & Engineered with absolute discretion. Built using custom structural markup, Tailwind CSS utility layers, and lightweight client-side scripts. Deployable instantly on Vercel.",
+      
+      // Modal translations
+      "modal-title": "Secure Briefing Channel",
+      "modal-desc": "Select your preferred method to establish contact. You can copy the credentials or open your system mailer.",
+      "modal-copy": "Copy",
+      "modal-call": "Call",
+      "modal-direct": "Open Mailer"
     },
     fr: {
       "hero-subtitle": "Cybersécurité & Infrastructure Réseau",
@@ -157,7 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-nsec-desc": "NorthSec 2026 — 6 flags validés (Avril 2026)",
       "ctf-skills-desc": "Compétences acquises : Forensique numérique, exploitation web, reverse engineering.",
 
-      "footer-desc": "Conçu & Développé avec discrétion. Construit à l'aide de balisage structurel personnalisé, de couches utilitaires Tailwind CSS et de scripts clients légers. Déployable instantanément sur Vercel."
+      "footer-desc": "Conçu & Développé avec discrétion. Construit à l'aide de balisage structurel personnalisé, de couches utilitaires Tailwind CSS et de scripts clients légers. Déployable instantanément sur Vercel.",
+      
+      // Modal translations
+      "modal-title": "Canal de Briefing Sécurisé",
+      "modal-desc": "Sélectionnez votre méthode préférée pour établir le contact. Vous pouvez copier les coordonnées ou ouvrir votre messagerie.",
+      "modal-copy": "Copier",
+      "modal-call": "Appeler",
+      "modal-direct": "Ouvrir la Messagerie"
     }
   };
 
@@ -268,4 +282,80 @@ document.addEventListener('DOMContentLoaded', () => {
   }, revealObserverOptions);
 
   revealElements.forEach(el => revealObserver.observe(el));
+
+  // 6. Secure Communication Modal Interactions
+  const modal = document.getElementById('contact-modal');
+  const modalContent = document.getElementById('contact-modal-content');
+  const ctaBtn = document.getElementById('btn-cta');
+  const socialEmailBtn = document.getElementById('social-link-email');
+  const closeBtn = document.getElementById('modal-close');
+  const copyBtn = document.getElementById('btn-copy-email');
+
+  const openModal = () => {
+    if (modal && modalContent) {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-95');
+      modalContent.classList.add('scale-100');
+    }
+  };
+
+  const closeModal = () => {
+    if (modal && modalContent) {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+    }
+  };
+
+  if (ctaBtn) {
+    ctaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  if (socialEmailBtn) {
+    socialEmailBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('pointer-events-none')) {
+      closeModal();
+    }
+  });
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('issam.echahbouni@etu.uae.ac.ma').then(() => {
+        const textSpan = copyBtn.querySelector('[data-i18n="modal-copy"]') || copyBtn;
+        const originalText = currentLang === 'en' ? 'Copy' : 'Copier';
+        const successText = currentLang === 'en' ? 'Copied!' : 'Copié !';
+        
+        textSpan.textContent = successText;
+        copyBtn.classList.remove('bg-cream');
+        copyBtn.classList.add('bg-emerald-500', 'text-white');
+        
+        setTimeout(() => {
+          textSpan.textContent = originalText;
+          copyBtn.classList.remove('bg-emerald-500', 'text-white');
+          copyBtn.classList.add('bg-cream');
+        }, 2000);
+      });
+    });
+  }
 });

@@ -73,7 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "interest-1": "• Bodybuilding (Discipline & Strength)",
       "interest-2": "• Simulation/Racing Games (Forza, ETS2)",
 
-      "sec-copyright": "© 2026 Issam Echahbouni. All security parameters and credentials protected under operational copyright."
+      "sec-copyright": "© 2026 Issam Echahbouni. All security parameters and credentials protected under operational copyright.",
+
+      // Modal translations
+      "modal-title": "Secure Briefing Channel",
+      "modal-desc": "Select your preferred method to establish contact. You can copy the credentials or open your system mailer.",
+      "modal-copy": "Copy",
+      "modal-call": "Call",
+      "modal-direct": "Open Mailer"
     },
     fr: {
       "toolbar-back": "← Retour au Portfolio",
@@ -147,7 +154,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "interest-1": "• Musculation (discipline, force & hypertrophie)",
       "interest-2": "• Jeux vidéo de simulation/automobile (ETS2, Forza)",
 
-      "sec-copyright": "© 2026 Issam Echahbouni. Tous paramètres de sécurité et qualifications protégés sous copyright opérationnel."
+      "sec-copyright": "© 2026 Issam Echahbouni. Tous paramètres de sécurité et qualifications protégés sous copyright opérationnel.",
+
+      // Modal translations
+      "modal-title": "Canal de Briefing Sécurisé",
+      "modal-desc": "Sélectionnez votre méthode préférée pour établir le contact. Vous pouvez copier les coordonnées ou ouvrir votre messagerie.",
+      "modal-copy": "Copier",
+      "modal-call": "Appeler",
+      "modal-direct": "Ouvrir la Messagerie"
     }
   };
 
@@ -223,6 +237,74 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 200);
         };
       }
+    });
+  }
+
+  // 4. Secure Communication Modal Interactions
+  const modal = document.getElementById('contact-modal');
+  const modalContent = document.getElementById('contact-modal-content');
+  const cvEmailBtn = document.getElementById('cv-email-trigger');
+  const closeBtn = document.getElementById('modal-close');
+  const copyBtn = document.getElementById('btn-copy-email');
+
+  const openModal = () => {
+    if (modal && modalContent) {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-95');
+      modalContent.classList.add('scale-100');
+    }
+  };
+
+  const closeModal = () => {
+    if (modal && modalContent) {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+    }
+  };
+
+  if (cvEmailBtn) {
+    cvEmailBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('pointer-events-none')) {
+      closeModal();
+    }
+  });
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('issam.echahbouni@etu.uae.ac.ma').then(() => {
+        const textSpan = copyBtn.querySelector('[data-i18n="modal-copy"]') || copyBtn;
+        const originalText = currentLang === 'en' ? 'Copy' : 'Copier';
+        const successText = currentLang === 'en' ? 'Copied!' : 'Copié !';
+        
+        textSpan.textContent = successText;
+        copyBtn.classList.remove('bg-cream');
+        copyBtn.classList.add('bg-emerald-500', 'text-white');
+        
+        setTimeout(() => {
+          textSpan.textContent = originalText;
+          copyBtn.classList.remove('bg-emerald-500', 'text-white');
+          copyBtn.classList.add('bg-cream');
+        }, 2000);
+      });
     });
   }
 });
