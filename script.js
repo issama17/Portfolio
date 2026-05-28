@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "cert-2-issuer": "Cisco Networking Academy — Apr 2026",
       "cert-3-title": "Foundations of Cybersecurity",
       "cert-3-issuer": "Google / Coursera — Apr 2026",
+      "cert-btn-verify": "Verify",
 
       "ctf-heading": "CTF Competitions",
       "ctf-ensi-desc": "ENSI 2K26 CTF (Cyberspace x ENSI) — 11 Flags solved (May 2026)",
@@ -179,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "cert-2-issuer": "Cisco Networking Academy — Avril 2026",
       "cert-3-title": "Foundations of Cybersecurity",
       "cert-3-issuer": "Google / Coursera — Avril 2026",
+      "cert-btn-verify": "Vérifier",
 
       "ctf-heading": "Compétitions CTF",
       "ctf-ensi-desc": "ENSI 2K26 CTF (Cyberspace x ENSI) — 11 flags validés (Mai 2026)",
@@ -279,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "cert-2-issuer": "Cisco Networking Academy — Abril 2026",
       "cert-3-title": "Fundamentos de la Ciberseguridad",
       "cert-3-issuer": "Google / Coursera — Abril 2026",
+      "cert-btn-verify": "Verificar",
 
       "ctf-heading": "Competiciones de CTF",
       "ctf-ensi-desc": "ENSI 2K26 CTF (Cyberspace x ENSI) — 11 Flags resueltos (Mayo 2026)",
