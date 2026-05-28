@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "modal-desc": "Select your preferred method to establish contact. You can copy the credentials or open your system mailer.",
       "modal-copy": "Copy",
       "modal-call": "Call",
-      "modal-direct": "Open Mailer"
+      "modal-direct": "Default Mail App"
     },
     fr: {
       "hero-subtitle": "Cybersécurité & Infrastructure Réseau",
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "modal-desc": "Sélectionnez votre méthode préférée pour établir le contact. Vous pouvez copier les coordonnées ou ouvrir votre messagerie.",
       "modal-copy": "Copier",
       "modal-call": "Appeler",
-      "modal-direct": "Ouvrir la Messagerie"
+      "modal-direct": "Messagerie par Défaut"
     }
   };
 
