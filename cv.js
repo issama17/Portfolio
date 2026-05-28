@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "proj-snort-meta": "Personal Lab",
       "proj-snort-l1": "• Installed Snort 3 and developed custom rules for ICMP anomaly detection, SSH brute force, and Nmap SYN scans.",
       "proj-snort-l2": "• Configured Snort in inline IPS mode (NFQ) for active threat blocking, testing it against SQL injection vectors.",
+      "proj-snort-presentation": "View Presentation",
+      "proj-snort-report": "View Lab Report",
 
       "proj-ctf-title": "CTF Platform - Capture The Flag",
       "proj-ctf-meta": "Academic Project",
@@ -100,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "proj-snort-meta": "Lab Personnel",
       "proj-snort-l1": "• Installé Snort 3 ; développé des règles personnalisées pour la détection ICMP, brute force SSH et scans Nmap SYN.",
       "proj-snort-l2": "• Configuré Snort en mode IPS inline (NFQ) pour le blocage actif du trafic malveillant incluant les injections SQL.",
+      "proj-snort-presentation": "Voir la Présentation",
+      "proj-snort-report": "Voir le Rapport de TP",
 
       "proj-ctf-title": "Plateforme CTF - Capture The Flag",
       "proj-ctf-meta": "Projet Académique",
