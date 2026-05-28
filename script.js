@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "project-3-meta": "Academic Project",
       "project-3-title": "Capture The Flag Web Platform",
       "project-3-desc": "Engineered and launched a functional, multiplayer web CTF platform built on object-oriented programming in Python. Implemented user-isolated challenge execution, automated scoring trackers, and clean administration panels. Hosted in production on Railway.",
+      "proj-ctf-repo": "Code Repository",
+      "proj-ctf-live": "Live Platform",
 
       "education-heading": "04 / Education & Certifications",
       "edu-dut-title": "DUT in Cybersecurity (Diploma of University Technology)",
@@ -132,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "project-3-meta": "Projet Académique",
       "project-3-title": "Plateforme Web Capture The Flag",
       "project-3-desc": "Conception et déploiement d'une plateforme web CTF fonctionnelle écrite en Python (POO). Intégration de l'isolation des défis pour chaque utilisateur, d'un tableau d'affichage des scores automatisé et de panels d'administration. Hébergée sur Railway.",
+      "proj-ctf-repo": "Dépôt de Code",
+      "proj-ctf-live": "Plateforme Live",
 
       "education-heading": "04 / Formation & Certifications",
       "edu-dut-title": "DUT en Cybersécurité",

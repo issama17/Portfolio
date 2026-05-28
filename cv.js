@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "proj-ctf-title": "CTF Platform - Capture The Flag",
       "proj-ctf-meta": "Academic Project",
       "proj-ctf-l1": "• Developed and deployed a functional web CTF platform built on object-oriented programming in Python. Hosted in production on Railway.",
+      "proj-ctf-repo": "Code Repository",
+      "proj-ctf-live": "Live Platform",
 
       "sec-certifications": "Industry Certifications",
       "cert-cisco-packet": "Getting Started with Cisco Packet Tracer — Cisco Networking Academy (May 2026)",
@@ -110,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "proj-ctf-title": "Plateforme CTF - Capture The Flag",
       "proj-ctf-meta": "Projet Académique",
       "proj-ctf-l1": "• Développé et déployé une plateforme web CTF fonctionnelle en Python (POO), hébergée en production sur Railway.",
+      "proj-ctf-repo": "Dépôt de Code",
+      "proj-ctf-live": "Plateforme Live",
 
       "sec-certifications": "Certifications",
       "cert-cisco-packet": "Getting Started with Cisco Packet Tracer — Cisco Networking Academy (Mai 2026)",
