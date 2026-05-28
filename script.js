@@ -85,8 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-nsec-desc": "NorthSec 2026 — 6 Flags solved (April 2026)",
       "ctf-morocco-spain-desc": "Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 Flags solved (Team ANARCHOTECH) (May 2026)",
       "ctf-skills-desc": "Acquired Competencies: Digital Forensics, Web Exploitation, Reverse Engineering.",
-
-      "footer-desc": "Designed & Engineered with absolute discretion. Built using custom structural markup, Tailwind CSS utility layers, and lightweight client-side scripts. Deployable instantly on Vercel.",
       
       // Modal translations
       "modal-title": "Secure Briefing Channel",
@@ -187,8 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-nsec-desc": "NorthSec 2026 — 6 flags validés (Avril 2026)",
       "ctf-morocco-spain-desc": "Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 flags validés (Équipe ANARCHOTECH) (Mai 2026)",
       "ctf-skills-desc": "Compétences acquises : Forensique numérique, exploitation web, reverse engineering.",
-
-      "footer-desc": "Conçu & Développé avec discrétion. Construit à l'aide de balisage structurel personnalisé, de couches utilitaires Tailwind CSS et de scripts clients légers. Déployable instantanément sur Vercel.",
       
       // Modal translations
       "modal-title": "Canal de Briefing Sécurisé",
@@ -289,8 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
       "ctf-nsec-desc": "NorthSec 2026 — 6 Flags resueltos (Abril 2026)",
       "ctf-morocco-spain-desc": "Morocco-Spain Cybersecurity Forum AI CTF 2026 — 5 Flags resueltos (Equipo ANARCHOTECH) (Mayo 2026)",
       "ctf-skills-desc": "Competencias adquiridas: Análisis forense digital, explotación web, ingeniería inversa.",
-
-      "footer-desc": "Diseñado y desarrollado con absoluta discreción. Construido usando marcado estructural personalizado, capas de utilidad de Tailwind CSS y scripts ligeros en el lado del cliente. Desplegable instantáneamente en Vercel.",
       
       // Modal translations
       "modal-title": "Canal de Briefing Seguro",
