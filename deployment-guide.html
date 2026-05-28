@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deployment Guide | Issam Echahbouni</title>
+  <meta name="description" content="CTF Platform production deployment guide on DigitalOcean, Ubuntu 24.04, Gunicorn, and Nginx.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            charcoal: {
+              DEFAULT: '#0a0b0c',
+              light: '#121315',
+              lighter: '#1a1c1e',
+            },
+            cream: {
+              DEFAULT: '#f5f2eb',
+              muted: '#d5d1c9',
+            },
+            slate: {
+              DEFAULT: '#8f97a3',
+              muted: '#575f6b',
+            },
+            navy: {
+              DEFAULT: '#152238',
+              light: '#1e2f4a',
+              dark: '#0d1524',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #0a0b0c;
+      color: #8f97a3;
+    }
+    .scroll-mt-20 {
+      scroll-margin-top: 5rem;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0b0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(245, 242, 235, 0.1);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(245, 242, 235, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-charcoal text-slate font-sans selection:bg-navy selection:text-cream leading-relaxed antialiased">
+
+  <!-- Floating Navigation Bar -->
+  <header class="bg-charcoal-light/95 border-b border-cream/5 sticky top-0 z-50 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-cream hover:text-cream/80 transition-colors uppercase tracking-wider focus:outline-none">
+        ← Back to Portfolio
+      </a>
+      <h1 class="hidden md:block font-serif text-lg font-medium text-cream">
+        CTF Platform Production Deployment Guide
+      </h1>
+      <a href="CTF_Platform_Deployment_Guide.md" download class="inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal bg-cream hover:bg-cream/90 px-3.5 py-1.5 rounded transition-all uppercase tracking-wider focus:outline-none">
+        Download Raw MD
+      </a>
+    </div>
+  </header>
+
+  <!-- Document Layout -->
+  <div class="max-w-6xl mx-auto px-6 py-10 md:py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Sticky Sidebar Navigation -->
+      <aside class="hidden lg:block lg:sticky lg:top-24 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto pr-4">
+        <h3 class="text-xs font-bold text-cream/50 uppercase tracking-widest mb-4">Table of Contents</h3>
+        <nav class="space-y-3 text-xs font-medium">
+          <a href="#phase-1-ssh-key-generation-droplet-creation" class="block text-slate hover:text-cream transition-colors">Phase 1: SSH & Droplet Setup</a>
+          <a href="#phase-2-server-access-baseline-security" class="block text-slate hover:text-cream transition-colors">Phase 2: Baseline Security</a>
+          <a href="#phase-3-code-deployment-environment-setup" class="block text-slate hover:text-cream transition-colors">Phase 3: Code & Environment</a>
+          <a href="#phase-4-production-stack-gunicorn-nginx" class="block text-slate hover:text-cream transition-colors">Phase 4: Gunicorn & Nginx Stack</a>
+          <a href="#phase-5-https-with-duckdns-let-s-encrypt" class="block text-slate hover:text-cream transition-colors">Phase 5: DuckDNS & HTTPS</a>
+          <a href="#phase-6-email-brevo-http-api" class="block text-slate hover:text-cream transition-colors">Phase 6: Brevo Email API</a>
+          <a href="#phase-7-workflow-local-development-server-deployment" class="block text-slate hover:text-cream transition-colors">Phase 7: Git Workflow</a>
+          <a href="#phase-8-operations-reference" class="block text-slate hover:text-cream transition-colors">Phase 8: Operations Reference</a>
+          <a href="#architecture-summary" class="block text-slate hover:text-cream transition-colors">System Architecture</a>
+        </nav>
+      </aside>
+      
+      <!-- Main Content Reader -->
+      <main class="lg:col-span-3 max-w-3xl border-l border-cream/5 pl-0 lg:pl-10">
+        <article class="prose prose-invert prose-cream max-w-none">
+          <h1 class="font-serif text-3xl md:text-4xl text-cream font-medium tracking-tight mt-8 mb-4 border-b border-cream/10 pb-3">CTF Platform — Production Deployment Guide</h1>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">DigitalOcean · Ubuntu 24.04 LTS · Gunicorn + Nginx</h3>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">Updated & battle-tested — synchronized with full deployment session</h3>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Stack confirmed from your codebase:</strong></div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">Flask 3 OOP app (<code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ApplicationCTF</code> class) · Neon PostgreSQL · Cloudinary · Google OAuth · Brevo HTTP API (email) · ProxyFix configured · Gunicorn in <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">requirements.txt</code> · Live at <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">https://ctflab-casi.duckdns.org</code></div>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-1-ssh-key-generation-droplet-creation" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 1 — SSH Key Generation & Droplet Creation</h2>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">1.1 Generate an ED25519 Key Pair (Windows CMD)</h3>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Windows note:</strong> <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">~/.ssh/</code> bash syntax does NOT work in CMD. Use <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">%USERPROFILE%</code> instead.</div>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-cmd">rem Create the .ssh folder if it doesn't exist (safe to run even if it does)
+mkdir %USERPROFILE%\.ssh
+
+rem Generate the key pair
+ssh-keygen -t ed25519 -C "ctf-digitalocean" -f %USERPROFILE%\.ssh\ctf_do_key
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Enter a passphrase when prompted (recommended), or press Enter twice to skip.</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-cmd">rem Print the public key — copy this entire line into DigitalOcean
+type %USERPROFILE%\.ssh\ctf_do_key.pub
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">1.2 Add the Public Key to DigitalOcean</h3>
+<br/>
+<ol class="list-decimal pl-5 space-y-2 text-xs md:text-sm my-4 text-slate">
+<li>In the DigitalOcean dashboard, scroll to <strong class="text-cream font-semibold">Authentication → SSH Keys → Add SSH Key</strong>.</li>
+<li>Paste the full <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ssh-ed25519 AAAA...</code> line.</li>
+<li>Name it <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ctf-deploy</code> and click <strong class="text-cream font-semibold">Add SSH Key</strong>.</li>
+<li>Click <strong class="text-cream font-semibold">Create Droplet</strong>.</li>
+</ol>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">1.3 Obtain Your Droplet's Public IP</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">After creation (~30 seconds), find your <strong class="text-cream font-semibold">Public IPv4</strong> on the droplet's Overview page.</p>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">Your IP: <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">46.101.201.45</code></div>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">1.4 Configure Your Local SSH Client (Windows)</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-cmd">notepad %USERPROFILE%\.ssh\config
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">If Notepad asks to create the file, click <strong class="text-cream font-semibold">Yes</strong>. Paste:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-">Host ctf-server
+    HostName 46.101.201.45
+    User root
+    IdentityFile C:\Users\Issam_ch4\.ssh\ctf_do_key
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Save (<code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">Ctrl+S</code>) and close. Connect with:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-cmd">ssh ctf-server
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">If <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ssh ctf-server</code> gives "No such host":</strong> Notepad may have saved it as <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">config.txt</code>.</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">Fix: <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">rename %USERPROFILE%\.ssh\config.txt config</code></div>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">&gt;</p>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Alternative — skip the config entirely:</strong></div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">```cmd</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">ssh -i %USERPROFILE%\.ssh\ctf_do_key root@46.101.201.45</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">```</div>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-2-server-access-baseline-security" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 2 — Server Access & Baseline Security</h2>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">2.1 First Login</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">ssh -i %USERPROFILE%\.ssh\ctf_do_key root@46.101.201.45
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Accept the host fingerprint (<code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">yes</code>). You are now root on your droplet.</p>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">2.2 System Update & Package Installation</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">apt update &amp;&amp; apt upgrade -y
+
+apt install -y \
+    git \
+    python3-pip \
+    python3-venv \
+    python3-dev \
+    nginx \
+    ufw \
+    curl \
+    unzip \
+    build-essential \
+    libpq-dev \
+    iptables
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Note:</strong> <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">apt update &amp;&amp; apt upgrade -y</code> on a fresh Ubuntu 24.04 takes 3–10 minutes. The <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">0% [Working]</code> display is normal — wait for the prompt to return.</div>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">&gt;</p>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">iptables</code> is included here because Ubuntu 24.04 has a UFW bug where <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ufw enable</code> aborts without it.</div>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">2.3 Create a Dedicated Non-Root User</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">adduser --disabled-password --gecos "" ctfapp
+mkdir -p /home/ctfapp
+chown ctfapp:ctfapp /home/ctfapp
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">2.4 Configure the Firewall (UFW)</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">ufw default deny incoming
+ufw default allow outgoing
+ufw allow OpenSSH
+ufw allow 'Nginx Full'
+ufw enable
+ufw status verbose
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Ubuntu 24.04 UFW bug:</strong> If <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ufw enable</code> says "Aborted" even after typing <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">y</code>, run:</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">```bash</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">apt install -y iptables</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">ufw enable</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">```</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">Status should now show <strong class="text-cream font-semibold">active</strong>.</div>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">2.5 Fix Static File Permissions for Nginx</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Nginx runs as <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">www-data</code> and needs read access to your app's home directory:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">chmod 755 /home/ctfapp
+chmod -R 755 /home/ctfapp/app/static
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Skip this step now</strong> — run it after cloning the repo in Phase 3. If you see 403 errors on images/CSS after deployment, this is the fix.</div>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">2.6 Create a 2 GB Swap File</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+swapon --show
+free -h
+echo '/swapfile none swap sw 0 0' &gt;&gt; /etc/fstab
+echo 'vm.swappiness=10' &gt;&gt; /etc/sysctl.conf
+sysctl -p
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">2.7 Harden SSH (Optional but Recommended)</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">nano /etc/ssh/sshd_config
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Set:</p>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-">PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+</code></pre>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">systemctl restart sshd
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3"><strong class="text-cream font-semibold">Open a second terminal and test before closing your current session.</strong></p>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-3-code-deployment-environment-setup" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 3 — Code Deployment & Environment Setup</h2>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">3.1 Switch to the App User</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">su - ctfapp
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">3.2 Clone the Repository</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">cd /home/ctfapp
+git clone https://github.com/issama17/ctf_production.git app
+cd app
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">The repo already contains <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">wsgi.py</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">app.py</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">models.py</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">routes.py</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">services.py</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">static/</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">templates/</code> — everything needed. The only things not in the repo (by design) are <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">venv/</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">.env</code>, and the SQLite <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">instance/</code> folder.</div>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">3.3 Create & Activate the Python Virtual Environment</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install python-dotenv psycopg2-binary
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">3.4 Configure Environment Variables</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">nano /home/ctfapp/app/.env
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Paste the following complete <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">.env</code> (fill in your values):</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-dotenv"># ── Flask Core ────────────────────────────────────────────────────────────────
+FLASK_ENV=production
+FLASK_APP=wsgi.py
+SECRET_KEY=your-super-secret-key-configured-here
+CTF_URL=https://ctflab-casi.duckdns.org
+
+# ── Database (Neon PostgreSQL) ────────────────────────────────────────────────
+DATABASE_URL=postgresql://neondb_owner:YOUR_DATABASE_PASSWORD@ep-your-database-pooler.us-east-1.aws.neon.tech/neondb?channel_binding=require&amp;sslmode=require
+
+# ── Google OAuth ──────────────────────────────────────────────────────────────
+GOOGLE_CLIENT_ID=your-google-oauth-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
+
+# ── Cloudinary ────────────────────────────────────────────────────────────────
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+
+# ── Email (Brevo HTTP API — bypasses DigitalOcean SMTP port block) ────────────
+SMTP_SERVER=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=your-brevo-smtp-user@smtp-brevo.com
+SMTP_PASSWORD=your-brevo-api-key-here
+SMTP_FROM=your-verified-sender-email@gmail.com
+
+# ── CTF Flags ─────────────────────────────────────────────────────────────────
+FLAG_SQLI=CTF{sql_1nj3ct10n_byp4ss_m4st3r}
+FLAG_SQLI_HASH=fef04c3b194d8da13d1aa49787dff526a0ae3932d1eaeab509e71a998d22c4fb
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Important notes:</strong></div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">- <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">CTF_URL</code> must NOT have a duplicate prefix. It should be exactly <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">CTF_URL=https://ctflab-casi.duckdns.org</code> — not <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">CTF_URL=CTF_URL=...</code></div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">- <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">SMTP_PASSWORD</code> here is the <strong class="text-cream font-semibold">Brevo API key</strong>, not an SMTP password. The email sending code uses the HTTP API to bypass DigitalOcean's outbound SMTP port block.</div>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">- <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">DATABASE_URL</code> must start with <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">postgresql://</code> not <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">postgres://</code> — SQLAlchemy requires the former.</div>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Save with <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">Ctrl+O</code> → Enter → <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">Ctrl+X</code>, then lock down permissions:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">chmod 600 /home/ctfapp/app/.env
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">3.5 The WSGI Entry Point</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Your repo already has <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">wsgi.py</code> committed. Verify it exists:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">cat /home/ctfapp/app/wsgi.py
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">It should import <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ApplicationCTF</code> and expose <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">.app</code>. If it's missing for any reason, recreate it:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">cat &gt; /home/ctfapp/app/wsgi.py &lt;&lt; 'EOF'
+import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+from app import ApplicationCTF
+_instance = ApplicationCTF()
+application = _instance.app
+app = application
+EOF
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">3.6 Initialize the Database</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">cd /home/ctfapp/app
+source venv/bin/activate
+
+python3 - &lt;&lt; 'EOF'
+import os
+from dotenv import load_dotenv
+load_dotenv('.env')
+from app import ApplicationCTF
+inst = ApplicationCTF()
+print("Database initialized successfully.")
+EOF
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">You should see <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">Database initialized successfully.</code> — this creates all tables on your Neon PostgreSQL database.</p>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">3.7 Fix Static File Permissions</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">exit   # back to root
+chmod 755 /home/ctfapp
+chmod -R 755 /home/ctfapp/app/static
+</code></pre>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-4-production-stack-gunicorn-nginx" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 4 — Production Stack: Gunicorn + Nginx</h2>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">4.1 Test Gunicorn Manually</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Switch to ctfapp and test:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">su - ctfapp
+cd /home/ctfapp/app
+source venv/bin/activate
+
+gunicorn \
+    --workers 2 \
+    --bind 127.0.0.1:8000 \
+    --timeout 120 \
+    wsgi:application
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">In a <strong class="text-cream font-semibold">second terminal</strong> (open DigitalOcean Web Console or a new SSH session), test:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">curl http://127.0.0.1:8000
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">If it returns HTML — Gunicorn works. Press <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">Ctrl+C</code> in the first terminal to stop it.</p>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Can't open a browser on the server</strong> — use <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">curl</code> instead. The browser test on <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">http://YOUR_IP:8000</code> is done from your PC, not the server terminal.</div>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">4.2 Create the Gunicorn systemd Service</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Exit back to root first:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">exit   # must be root to write to /etc/systemd/
+whoami # confirm: root
+</code></pre>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">nano /etc/systemd/system/ctfplatform.service
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Paste:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-ini">[Unit]
+Description=CTF Platform — Gunicorn WSGI Server
+After=network.target
+Wants=network.target
+
+[Service]
+User=ctfapp
+Group=ctfapp
+WorkingDirectory=/home/ctfapp/app
+EnvironmentFile=/home/ctfapp/app/.env
+Environment="PATH=/home/ctfapp/app/venv/bin"
+
+ExecStart=/home/ctfapp/app/venv/bin/gunicorn \
+    --workers 3 \
+    --worker-class sync \
+    --bind unix:/run/ctfplatform/gunicorn.sock \
+    --pid /run/ctfplatform/gunicorn.pid \
+    --access-logfile /var/log/ctfplatform/access.log \
+    --error-logfile /var/log/ctfplatform/error.log \
+    --log-level info \
+    --timeout 120 \
+    --keep-alive 5 \
+    --max-requests 1000 \
+    --max-requests-jitter 100 \
+    wsgi:application
+
+RuntimeDirectory=ctfplatform
+RuntimeDirectoryMode=0755
+
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Note:</strong> <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">StartLimitIntervalSec</code> is removed from <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">[Service]</code> — Ubuntu 24.04 systemd logs a warning if it's there. It belongs in <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">[Unit]</code> only if needed.</div>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">mkdir -p /var/log/ctfplatform
+chown ctfapp:ctfapp /var/log/ctfplatform
+
+systemctl daemon-reload
+systemctl enable ctfplatform
+systemctl start ctfplatform
+systemctl status ctfplatform
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">4.3 Configure Nginx</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">rm /etc/nginx/sites-enabled/default
+nano /etc/nginx/sites-available/ctfplatform
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Paste:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-nginx">upstream ctfplatform_app {
+    server unix:/run/ctfplatform/gunicorn.sock fail_timeout=0;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name ctflab-casi.duckdns.org;
+
+    add_header X-Frame-Options        "SAMEORIGIN"   always;
+    add_header X-Content-Type-Options "nosniff"      always;
+    add_header X-XSS-Protection       "1; mode=block" always;
+    add_header Referrer-Policy        "strict-origin" always;
+
+    access_log /var/log/nginx/ctfplatform_access.log;
+    error_log  /var/log/nginx/ctfplatform_error.log;
+
+    location /static/ {
+        alias /home/ctfapp/app/static/;
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    location = /favicon.png {
+        alias /home/ctfapp/app/static/favicon.png;
+        expires 30d;
+        access_log off;
+    }
+
+    location / {
+        proxy_pass          http://ctfplatform_app;
+        proxy_redirect      off;
+        proxy_set_header    Host              $host;
+        proxy_set_header    X-Real-IP         $remote_addr;
+        proxy_set_header    X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto $scheme;
+        proxy_connect_timeout   60s;
+        proxy_send_timeout      120s;
+        proxy_read_timeout      120s;
+        proxy_buffering         on;
+        proxy_buffer_size       8k;
+        proxy_buffers           8 8k;
+    }
+
+    client_max_body_size 20M;
+}
+</code></pre>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">ln -s /etc/nginx/sites-available/ctfplatform /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
+systemctl enable nginx
+</code></pre>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-5-https-with-duckdns-let-s-encrypt" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 5 — HTTPS with DuckDNS + Let's Encrypt</h2>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">5.1 Set Up Your Free DuckDNS Domain</h3>
+<br/>
+<ol class="list-decimal pl-5 space-y-2 text-xs md:text-sm my-4 text-slate">
+<li>Go to <a href="https://duckdns.org" target="_blank" rel="noopener noreferrer" class="text-cream hover:underline font-medium">duckdns.org</a> and log in with Google.</li>
+<li>Create a subdomain — your domain is <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">ctflab-casi.duckdns.org</code>.</li>
+<li><strong class="text-cream font-semibold">Manually type</strong> <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">46.101.201.45</code> in the IP field and click <strong class="text-cream font-semibold">Update IP</strong>.</li>
+</ol>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r">DuckDNS auto-detects your local PC's IP — you must override it with the server IP manually.</div>
+<ol class="list-decimal pl-5 space-y-2 text-xs md:text-sm my-4 text-slate">
+<li>Verify DNS propagated correctly:</li>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">   nslookup ctflab-casi.duckdns.org 8.8.8.8
+</code></pre>
+</ol>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Must return <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">46.101.201.45</code> before running certbot.</p>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">5.2 Install Certbot and Get the Certificate</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">apt install -y certbot python3-certbot-nginx
+certbot --nginx -d ctflab-casi.duckdns.org
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Follow the prompts — enter your email, agree to terms. If it asks whether to reinstall an existing cert, press <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">1</code>.</p>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Upon success you'll see:</p>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-">Congratulations! You have successfully enabled HTTPS on https://ctflab-casi.duckdns.org
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Certbot automatically rewrites your Nginx config for HTTPS.</p>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">5.3 Update .env and Restart</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">nano /home/ctfapp/app/.env
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Ensure this line is exactly:</p>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-dotenv">CTF_URL=https://ctflab-casi.duckdns.org
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Common mistake:</strong> Do NOT write <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">CTF_URL=CTF_URL=https://...</code> — the key name must appear only once.</div>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">systemctl restart ctfplatform
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">5.4 Update Google OAuth</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer" class="text-cream hover:underline font-medium">Google Cloud Console</a> → <strong class="text-cream font-semibold">APIs &amp; Services → Credentials → your OAuth 2.0 Client ID</strong>.</p>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Under <strong class="text-cream font-semibold">Authorized redirect URIs</strong>, add:</p>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-">https://ctflab-casi.duckdns.org/google/auth
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Under <strong class="text-cream font-semibold">Authorized JavaScript origins</strong>, add:</p>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-">https://ctflab-casi.duckdns.org
+</code></pre>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Do not add raw IPs</strong> — Google OAuth rejects them. Keep your existing Vercel URIs so the old deployment still works.</div>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Save and wait ~1 minute for Google to propagate. Then test Google login at <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">https://ctflab-casi.duckdns.org</code>.</p>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">5.5 Verify Certificate Auto-Renewal</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">systemctl status certbot.timer
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Certificates renew automatically every 90 days.</p>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-6-email-brevo-http-api" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 6 — Email: Brevo HTTP API</h2>
+<br/>
+<div class="my-4 p-4 bg-navy/20 border-l-2 border-cream/30 text-xs md:text-sm text-slate-muted italic rounded-r"><strong class="text-cream font-semibold">Why not SMTP?</strong> DigitalOcean blocks all outbound SMTP ports (25, 465, 587) on new accounts as an anti-spam measure. The fix is to use Brevo's <strong class="text-cream font-semibold">HTTP API</strong> which goes over port 443 (HTTPS) — always open.</div>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">6.1 How It Works</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">Your <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">services.py</code> was modified to call Brevo's REST API directly instead of using <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">smtplib</code>. The key change in the <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">envoyer_email_reinitialisation</code> function:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-python">import urllib.request
+import json
+
+# ... inside the function ...
+try:
+    resend_key = os.getenv("SMTP_PASSWORD")   # holds the Brevo API key
+    payload = json.dumps({
+        "sender": {"email": expediteur},
+        "to": [{"email": email}],
+        "subject": sujet,
+        "htmlContent": html_content
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.brevo.com/v3/smtp/email",
+        data=payload,
+        headers={
+            "api-key": resend_key,
+            "Content-Type": "application/json"
+        }
+    )
+    urllib.request.urlopen(req, timeout=10)
+    self.__logger.info(f"E-mail envoyé via Brevo à {email}.")
+    return True
+except Exception as e:
+    self.__logger.error(f"Erreur Brevo à {email}: {e}")
+    return False
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">6.2 Brevo Credentials</h3>
+<br/>
+<ul class="list-disc pl-5 space-y-2 text-xs md:text-sm my-4 text-slate">
+<li><strong class="text-cream font-semibold">API Key</strong> (goes in <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">SMTP_PASSWORD</code>): get from <a href="https://app.brevo.com" target="_blank" rel="noopener noreferrer" class="text-cream hover:underline font-medium">app.brevo.com</a> → API Keys</li>
+<li><strong class="text-cream font-semibold">SMTP_FROM</strong>: use <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">room13780@gmail.com</code> (your verified sender)</li>
+<li>The <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">SMTP_SERVER</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">SMTP_PORT</code>, <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">SMTP_USER</code> variables are kept in <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">.env</code> but unused by the HTTP API code</li>
+</ul>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">6.3 Debug Email Issues</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">journalctl -u ctfplatform -n 30 --no-pager | grep -i "brevo\|erreur\|error\|smtp"
+</code></pre>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-7-workflow-local-development-server-deployment" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 7 — Workflow: Local Development → Server Deployment</h2>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">7.1 Your Repositories</h3>
+<br/>
+<ul class="list-disc pl-5 space-y-2 text-xs md:text-sm my-4 text-slate">
+<li><strong class="text-cream font-semibold">Production repo:</strong> <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">https://github.com/issama17/ctf_production.git</code></li>
+<li><strong class="text-cream font-semibold">Server path:</strong> <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">/home/ctfapp/app</code></li>
+</ul>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">7.2 One-Time Local Setup</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-cmd">git clone https://github.com/issama17/ctf_production.git
+cd ctf_production
+code .
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">7.3 Deploy Changes (Standard Workflow)</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3"><strong class="text-cream font-semibold">On your local machine</strong> after making changes:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">git add .
+git commit -m "describe your change"
+git push
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3"><strong class="text-cream font-semibold">On the server:</strong></p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">cd /home/ctfapp/app &amp;&amp; git pull &amp;&amp; systemctl restart ctfplatform
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">7.4 GitHub Authentication</h3>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">If <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">git push</code> asks for a password, use a <strong class="text-cream font-semibold">Personal Access Token</strong> (not your GitHub password):</p>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → check <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">repo</code> scope.</p>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">To embed the token so you're never asked again:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">git remote set-url origin https://issama17:YOUR_TOKEN@github.com/issama17/ctf_production.git
+</code></pre>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="phase-8-operations-reference" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Phase 8 — Operations Reference</h2>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">Check Service Status</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">systemctl status ctfplatform
+systemctl status nginx
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">View Live Logs</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash"># App logs (Gunicorn + Flask)
+journalctl -u ctfplatform -n 100 -f
+
+# Nginx error log
+tail -f /var/log/nginx/ctfplatform_error.log
+
+# Gunicorn access log
+tail -f /var/log/ctfplatform/access.log
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">Restart After a Code Change</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">cd /home/ctfapp/app &amp;&amp; git pull &amp;&amp; systemctl restart ctfplatform
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">Check Memory & Swap</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">free -h
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">Check Disk Usage</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">df -h
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">Verify Database Connection</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">cat /home/ctfapp/app/.env | grep DATABASE_URL
+</code></pre>
+<br/>
+<h3 class="font-sans text-sm md:text-base text-cream/90 font-bold uppercase tracking-wider mt-6 mb-3">Verify Static Files are Accessible</h3>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">curl -I https://ctflab-casi.duckdns.org/static/images/logo.png
+# Should return: HTTP/2 200
+</code></pre>
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">If it returns 403, rerun the permissions fix:</p>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-bash">chmod 755 /home/ctfapp
+chmod -R 755 /home/ctfapp/app/static
+</code></pre>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<h2 id="architecture-summary" class="font-serif text-xl md:text-2xl text-cream font-semibold tracking-wide mt-8 mb-4 border-b border-cream/5 pb-2 scroll-mt-20">Architecture Summary</h2>
+<br/>
+<pre class="bg-charcoal border border-cream/5 p-4 rounded font-mono text-[11px] md:text-xs overflow-x-auto text-cream/90 my-4 shadow-inner relative"><code class="language-">Internet (HTTPS :443)
+    │
+    ▼
+┌─────────────────────────────────────┐
+│  Nginx (reverse proxy)              │
+│  • TLS termination (Let's Encrypt)  │
+│  • Serves /static/ directly         │
+│  • Security headers                 │
+│  • Forwards ProxyFix headers        │
+└──────────┬──────────────────────────┘
+           │  Unix socket
+           ▼
+┌─────────────────────────────────────┐
+│  Gunicorn (3 sync workers)          │
+│  • wsgi:application entry point     │
+│  • Managed by systemd               │
+│  • Auto-restarts on failure         │
+└──────────┬──────────────────────────┘
+           │
+           ▼
+┌─────────────────────────────────────┐
+│  Flask (ApplicationCTF)             │
+│  • Neon PostgreSQL (cloud)          │
+│  • Cloudinary (image uploads)       │
+│  • Google OAuth                     │
+│  • Brevo HTTP API (email)           │
+│  • ProxyFix middleware              │
+└─────────────────────────────────────┘
+
+External services:
+  Neon     → ep-young-sky-ap78r6c5-pooler.c-7.us-east-1.aws.neon.tech
+  Brevo    → api.brevo.com/v3/smtp/email
+  Cloudinary → api.cloudinary.com
+  DuckDNS  → ctflab-casi.duckdns.org → 46.101.201.45
+</code></pre>
+<br/>
+<hr class="border-cream/5 my-8" />
+<br/>
+<p class="text-xs md:text-sm text-slate leading-relaxed my-3">*Live at: <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">https://ctflab-casi.duckdns.org</code> · Server: <code class="bg-charcoal p-0.5 px-1 rounded font-mono text-[10px] md:text-xs text-cream/80 border border-cream/5">46.101.201.45</code> · DigitalOcean Frankfurt FRA1 · Ubuntu 24.04 LTS · 1 vCPU / 1 GB RAM / 25 GB SSD + 2 GB Swap*</p>
+        </article>
+        
+        <footer class="mt-16 pt-8 border-t border-cream/5 text-center text-xs text-slate/50">
+          <p>© 2026 Issam Echahbouni. Documented under operational security parameters.</p>
+        </footer>
+      </main>
+
+    </div>
+  </div>
+
+</body>
+</html>

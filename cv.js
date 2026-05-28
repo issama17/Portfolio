@@ -80,7 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
       "modal-desc": "Select your preferred method to establish contact. You can copy the credentials or open your system mailer.",
       "modal-copy": "Copy",
       "modal-call": "Call",
-      "modal-direct": "Default Mail App"
+      "modal-direct": "Default Mail App",
+      
+      // Project 4 & Guide translations
+      "proj-ctf-guide": "Deployment Guide",
+      "project-4-meta": "Academic Project",
+      "project-4-title": "Secure Enterprise VPN Architecture",
+      "proj-vpn-l1": "• Designed and audited a secure site-to-site and remote-access VPN tunnel infrastructure using IPsec and OpenVPN.",
+      "proj-vpn-l2": "• Configured network firewalls, custom security policies, routing protocols, and access control lists (ACLs) to protect corporate resources.",
+      "proj-vpn-report": "View Architecture Report"
     },
     fr: {
       "toolbar-back": "← Retour au Portfolio",
@@ -161,7 +169,15 @@ document.addEventListener('DOMContentLoaded', () => {
       "modal-desc": "Sélectionnez votre méthode préférée pour établir le contact. Vous pouvez copier les coordonnées ou ouvrir votre messagerie.",
       "modal-copy": "Copier",
       "modal-call": "Appeler",
-      "modal-direct": "Messagerie par Défaut"
+      "modal-direct": "Messagerie par Défaut",
+      
+      // Project 4 & Guide translations
+      "proj-ctf-guide": "Guide de Déploiement",
+      "project-4-meta": "Projet Académique",
+      "project-4-title": "Architecture VPN Sécurisée d'Entreprise",
+      "proj-vpn-l1": "• Conception et audit d'une infrastructure de tunnels VPN site-à-site et d'accès distant sécurisée avec IPsec et OpenVPN.",
+      "proj-vpn-l2": "• Configuration de pare-feux réseau, de politiques de sécurité personnalisées, de protocoles de routage et de listes de contrôle d'accès (ACL).",
+      "proj-vpn-report": "Voir le Rapport d'Architecture"
     }
   };
 

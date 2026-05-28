@@ -85,7 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "modal-desc": "Select your preferred method to establish contact. You can copy the credentials or open your system mailer.",
       "modal-copy": "Copy",
       "modal-call": "Call",
-      "modal-direct": "Default Mail App"
+      "modal-direct": "Default Mail App",
+      
+      // Project 4 & Guide translations
+      "proj-ctf-guide": "Deployment Guide",
+      "project-4-meta": "Academic Project",
+      "project-4-title": "Secure Enterprise VPN Architecture",
+      "project-4-desc": "Designed and documented a secure site-to-site and remote-access VPN infrastructure for enterprise environments. Defined strict firewall rule sets, cryptographic protocols (IPsec/OpenVPN), and access control lists (ACLs) to ensure data confidentiality and secure remote operations.",
+      "proj-vpn-report": "View Architecture Report"
     },
     fr: {
       "hero-subtitle": "Cybersécurité & Infrastructure Réseau",
@@ -171,7 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "modal-desc": "Sélectionnez votre méthode préférée pour établir le contact. Vous pouvez copier les coordonnées ou ouvrir votre messagerie.",
       "modal-copy": "Copier",
       "modal-call": "Appeler",
-      "modal-direct": "Messagerie par Défaut"
+      "modal-direct": "Messagerie par Défaut",
+      
+      // Project 4 & Guide translations
+      "proj-ctf-guide": "Guide de Déploiement",
+      "project-4-meta": "Projet Académique",
+      "project-4-title": "Architecture VPN Sécurisée d'Entreprise",
+      "project-4-desc": "Conception et documentation d'une infrastructure VPN site-à-site et d'accès distant sécurisée pour un environnement d'entreprise. Définition de pare-feux, de protocoles cryptographiques (IPsec/OpenVPN) et de listes de contrôle d'accès (ACL) pour garantir la confidentialité des flux.",
+      "proj-vpn-report": "Voir le Rapport d'Architecture"
     }
   };
 
