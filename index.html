@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Issam Echahbouni | Cybersecurity & Network Infrastructure</title>
-  <meta name="description" content="Professional portfolio of Issam Echahbouni, specializing in enterprise network defense, SIEM deployment, and modern penetration testing methodologies.">
+  <meta name="description" content="Professional portfolio of Issam Echahbouni, specializing in enterprise network defense, SIEM/NIDS deployment, and modern penetration testing methodologies.">
   <meta name="author" content="Issam Echahbouni">
   
   <!-- SEO & Social Sharing -->
   <meta property="og:title" content="Issam Echahbouni | Cybersecurity & Network Infrastructure">
-  <meta property="og:description" content="Professional portfolio of Issam Echahbouni, specializing in enterprise network defense, SIEM deployment, and modern penetration testing methodologies.">
+  <meta property="og:description" content="Professional portfolio of Issam Echahbouni, specializing in enterprise network defense, SIEM/NIDS deployment, and modern penetration testing methodologies.">
   <meta property="og:type" content="website">
   
   <!-- Fonts -->
@@ -60,6 +60,13 @@
   <!-- Radial Background Spotlight Effect -->
   <div class="spotlight" id="bg-spotlight"></div>
 
+  <!-- Language Switcher Control -->
+  <div class="fixed top-6 right-6 z-50 flex items-center bg-charcoal-light/80 border border-cream/5 px-1.5 py-1 rounded-full text-xs font-semibold backdrop-blur tracking-wider shadow-lg">
+    <button id="lang-en" class="px-3 py-1 rounded-full transition-all text-cream focus:outline-none">EN</button>
+    <span class="text-slate/20 select-none">|</span>
+    <button id="lang-fr" class="px-3 py-1 rounded-full transition-all text-slate focus:outline-none">FR</button>
+  </div>
+
   <!-- Primary Container -->
   <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0 relative z-10">
     <div class="lg:flex lg:justify-between lg:gap-4">
@@ -72,32 +79,48 @@
           <h1 class="font-serif text-4xl md:text-5xl font-medium tracking-tight text-cream">
             <a href="#">Issam Echahbouni</a>
           </h1>
-          <h2 class="mt-3 font-sans text-lg font-medium tracking-wide text-cream/80 uppercase sm:text-xl">
+          <h2 data-i18n="hero-subtitle" class="mt-3 font-sans text-sm font-medium tracking-widest text-cream/80 uppercase">
             Cybersecurity & Network Infrastructure
           </h2>
-          <p class="mt-4 max-w-xs text-sm text-slate leading-relaxed">
-            Architecting secure network perimeters and threat defense systems for mission-critical enterprise environments.
+          <p data-i18n="hero-tagline" class="mt-4 max-w-xs text-xs md:text-sm text-slate leading-relaxed">
+            First-year DUT Cybersecurity student at EST Tétouan, passionate about threat detection, SIEM architectures, network auditing, and CTF competitions.
           </p>
 
+          <!-- CV Download Button in Header -->
+          <div class="mt-6">
+            <a id="btn-download-resume" href="CV_Echahbouni_Issam.pdf" download class="inline-flex items-center gap-2 px-5 py-2.5 border border-cream/10 bg-navy/20 text-cream font-medium tracking-wide uppercase text-[10px] transition-all duration-300 hover:border-cream/30 hover:bg-navy/40 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              <span data-i18n="btn-download-resume">Download Resume PDF</span>
+            </a>
+          </div>
+
           <!-- Navigation Links (Scroll Spy Target) -->
-          <nav class="nav hidden lg:block mt-16" aria-label="In-page jump links">
+          <nav class="nav hidden lg:block mt-12" aria-label="In-page jump links">
             <ul class="flex flex-col gap-2 w-max">
               <li>
                 <a id="nav-link-about" href="#about" class="nav-link group flex items-center py-3 active">
                   <span class="nav-indicator mr-4 h-px w-8 bg-slate transition-all group-hover:w-14 group-hover:bg-cream motion-reduce:transition-none"></span>
-                  <span class="nav-text text-xs font-semibold uppercase tracking-widest text-slate group-hover:text-cream">01 / About</span>
+                  <span data-i18n="nav-about" class="nav-text text-xs font-semibold uppercase tracking-widest text-slate group-hover:text-cream">01 / About</span>
                 </a>
               </li>
               <li>
                 <a id="nav-link-skills" href="#skills" class="nav-link group flex items-center py-3">
                   <span class="nav-indicator mr-4 h-px w-8 bg-slate transition-all group-hover:w-14 group-hover:bg-cream motion-reduce:transition-none"></span>
-                  <span class="nav-text text-xs font-semibold uppercase tracking-widest text-slate group-hover:text-cream">02 / Skills</span>
+                  <span data-i18n="nav-skills" class="nav-text text-xs font-semibold uppercase tracking-widest text-slate group-hover:text-cream">02 / Skills</span>
                 </a>
               </li>
               <li>
                 <a id="nav-link-projects" href="#projects" class="nav-link group flex items-center py-3">
                   <span class="nav-indicator mr-4 h-px w-8 bg-slate transition-all group-hover:w-14 group-hover:bg-cream motion-reduce:transition-none"></span>
-                  <span class="nav-text text-xs font-semibold uppercase tracking-widest text-slate group-hover:text-cream">03 / Projects</span>
+                  <span data-i18n="nav-projects" class="nav-text text-xs font-semibold uppercase tracking-widest text-slate group-hover:text-cream">03 / Projects</span>
+                </a>
+              </li>
+              <li>
+                <a id="nav-link-education" href="#education" class="nav-link group flex items-center py-3">
+                  <span class="nav-indicator mr-4 h-px w-8 bg-slate transition-all group-hover:w-14 group-hover:bg-cream motion-reduce:transition-none"></span>
+                  <span data-i18n="nav-education" class="nav-text text-xs font-semibold uppercase tracking-widest text-slate group-hover:text-cream">04 / Education & Certs</span>
                 </a>
               </li>
             </ul>
@@ -112,27 +135,33 @@
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span>Active Operational Status: Ready for Engagement</span>
+            <span data-i18n="status-ready">Initiation Internship late 2026: Ready for Engagement</span>
+          </div>
+
+          <!-- Contact Coordinates -->
+          <div class="text-xs text-slate/75 space-y-1 font-medium">
+            <p>📍 M'diq, Morocco (Tétouan / Tanger)</p>
+            <p>📞 +212 675 23 40 46</p>
           </div>
 
           <ul class="flex items-center gap-5" aria-label="Social media links">
             <li>
-              <a id="social-link-github" href="https://github.com" target="_blank" rel="noopener noreferrer" class="block text-slate hover:text-cream transition-colors" aria-label="GitHub (Opens in a new tab)">
-                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <a id="social-link-github" href="https://github.com/issama17" target="_blank" rel="noopener noreferrer" class="block text-slate hover:text-cream transition-colors" aria-label="GitHub (Opens in a new tab)">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
                 </svg>
               </a>
             </li>
             <li>
-              <a id="social-link-linkedin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="block text-slate hover:text-cream transition-colors" aria-label="LinkedIn (Opens in a new tab)">
-                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <a id="social-link-linkedin" href="https://linkedin.com/in/issam-echahbouni" target="_blank" rel="noopener noreferrer" class="block text-slate hover:text-cream transition-colors" aria-label="LinkedIn (Opens in a new tab)">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" />
                 </svg>
               </a>
             </li>
             <li>
-              <a id="social-link-email" href="mailto:contact@issam.security" class="block text-slate hover:text-cream transition-colors" aria-label="Send Email">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <a id="social-link-email" href="mailto:issam.echahbouni@etu.uae.ac.ma" class="block text-slate hover:text-cream transition-colors" aria-label="Send Email">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
               </a>
@@ -148,17 +177,17 @@
         <!-- About Section -->
         <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 reveal" aria-label="About me">
           <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-charcoal/85 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-0 lg:w-auto lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-            <h2 class="font-serif text-sm font-bold tracking-widest text-cream uppercase lg:hidden">01 / About</h2>
+            <h2 data-i18n="about-heading" class="font-serif text-sm font-bold tracking-widest text-cream uppercase lg:hidden">01 / About</h2>
           </div>
           <div class="space-y-4 text-slate font-sans leading-relaxed text-sm md:text-base">
-            <p>
-              I approach digital security with the same precision, discretion, and long-term planning that private banks apply to capital management. Specializing in secure network architectures and proactive threat containment, I bridge the gap between high-level risk management and deep technical diagnostics.
+            <p data-i18n="about-p1">
+              I approach digital security with the same precision, discretion, and technical rigor required in mission-critical environments. Currently a first-year DUT Cybersecurity student at EST Tétouan, I specialize in designing secure network perimeters and threat defense workflows.
             </p>
-            <p>
-              Currently, my work focuses on fortifying critical infrastructure, designing tamper-resistant network perimeters, and developing automated tools to analyze and neutralize vectors of compromise. I build on a foundation of clean code, rigorous documentation, and absolute alignment with institutional compliance standards.
+            <p data-i18n="about-p2">
+              My hands-on experience includes laboratory deployment of SIEM and NIDS/IPS solutions (Wazuh, Suricata, Snort) coupled with active Red Team simulations. This double-sided exposure allows me to construct effective correlation rules and validate threat coverage using tools like Nmap, Hydra, SQLMap, and hping3.
             </p>
-            <p>
-              I thrive on dissecting complex systems, understanding their fundamental assumptions, and engineering robust, defense-in-depth mitigations that withstand sophisticated adversaries.
+            <p data-i18n="about-p3">
+              I am an active CTF player (solving challenges in ENSI CTF and NorthSec), focusing on digital forensics, web exploitation, and reverse engineering. I am seeking a practical initiation internship for late 2026 to apply my technical curiosity and problem-solving skills to real-world corporate infrastructures.
             </p>
           </div>
         </section>
@@ -166,77 +195,77 @@
         <!-- Skills Section -->
         <section id="skills" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 reveal" aria-label="Technical Skills">
           <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-charcoal/85 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-0 lg:w-auto lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-            <h2 class="font-serif text-sm font-bold tracking-widest text-cream uppercase lg:hidden">02 / Skills</h2>
+            <h2 data-i18n="skills-heading" class="font-serif text-sm font-bold tracking-widest text-cream uppercase lg:hidden">02 / Skills</h2>
           </div>
           
           <div class="space-y-6">
-            <p class="text-slate text-sm leading-relaxed">
-              My technical expertise spans multiple security disciplines. Below is a structured view of my operational capabilities.
+            <p data-i18n="skills-intro" class="text-slate text-sm leading-relaxed">
+              A structured index of technical competencies cultivated through university projects, home labs, and CTF challenge environments.
             </p>
 
             <div class="grid gap-4 sm:grid-cols-2">
               
               <!-- Skill Category: Security Operations -->
               <div class="p-5 border border-slate/10 bg-charcoal-light rounded-lg transition-colors hover:border-slate/20">
-                <h3 class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
+                <h3 data-i18n="skill-secops-title" class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
                   <svg class="h-4 w-4 text-slate-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                   </svg>
-                  Security Operations
+                  Security Operations & SIEM
                 </h3>
                 <ul class="space-y-1.5 text-xs text-slate font-medium">
-                  <li>• SIEM & Log Analysis (Splunk, ELK)</li>
-                  <li>• Threat Intelligence & Hunting</li>
-                  <li>• Incident Response Protocols</li>
-                  <li>• Enterprise Firewalls & UTM</li>
+                  <li data-i18n="skill-secops-item1">• Wazuh SIEM, Suricata NIDS, Snort IDS/IPS</li>
+                  <li data-i18n="skill-secops-item2">• Event Correlation & Audit Log Analysis</li>
+                  <li data-i18n="skill-secops-item3">• Threat Hunting & Incident Monitoring</li>
+                  <li data-i18n="skill-secops-item4">• Active System Supervision with Zabbix</li>
                 </ul>
               </div>
 
               <!-- Skill Category: Network Architecture -->
               <div class="p-5 border border-slate/10 bg-charcoal-light rounded-lg transition-colors hover:border-slate/20">
-                <h3 class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
+                <h3 data-i18n="skill-netdef-title" class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
                   <svg class="h-4 w-4 text-slate-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                   </svg>
-                  Network & Defense
+                  Network & Defense Infrastructure
                 </h3>
                 <ul class="space-y-1.5 text-xs text-slate font-medium">
-                  <li>• Secure Perimeter & VPN Architecture</li>
-                  <li>• Zero Trust Access Control</li>
-                  <li>• Network Diagnostics & Packet Auditing</li>
-                  <li>• Cryptography (PKI, IPSec, TLS)</li>
+                  <li data-i18n="skill-netdef-item1">• Secure Perimeter Engineering & VPN Setup</li>
+                  <li data-i18n="skill-netdef-item2">• Windows Server Admin (Active Directory, GPO)</li>
+                  <li data-i18n="skill-netdef-item3">• OSI/TCP-IP Stack Auditing & Packet Capture</li>
+                  <li data-i18n="skill-netdef-item4">• Firewalls, Routing Protocols & IDS/IPS Modes</li>
                 </ul>
               </div>
 
               <!-- Skill Category: Offensive Engineering -->
               <div class="p-5 border border-slate/10 bg-charcoal-light rounded-lg transition-colors hover:border-slate/20">
-                <h3 class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
+                <h3 data-i18n="skill-offensive-title" class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
                   <svg class="h-4 w-4 text-slate-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                   </svg>
-                  Offensive Security
+                  Offensive & Vulnerability Auditing
                 </h3>
                 <ul class="space-y-1.5 text-xs text-slate font-medium">
-                  <li>• Vulnerability Assessments</li>
-                  <li>• Penetration Testing (OWASP Top 10)</li>
-                  <li>• Exploit Reconstruction</li>
-                  <li>• Sandboxed Malware Observation</li>
+                  <li data-i18n="skill-offensive-item1">• Vulnerability Scans (Nmap, Nikto, SQLMap)</li>
+                  <li data-i18n="skill-offensive-item2">• Simulated Brute-Force Testing (Hydra, hping3)</li>
+                  <li data-i18n="skill-offensive-item3">• Digital Forensics & Reverse Engineering</li>
+                  <li data-i18n="skill-offensive-item4">• Lab-Environment Malware Isolation</li>
                 </ul>
               </div>
 
               <!-- Skill Category: Systems & Automation -->
               <div class="p-5 border border-slate/10 bg-charcoal-light rounded-lg transition-colors hover:border-slate/20">
-                <h3 class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
+                <h3 data-i18n="skill-automation-title" class="font-serif text-md font-semibold text-cream mb-3 flex items-center gap-2">
                   <svg class="h-4 w-4 text-slate-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                   </svg>
-                  Systems & Scripting
+                  Automation & Virtualization
                 </h3>
                 <ul class="space-y-1.5 text-xs text-slate font-medium">
-                  <li>• Python Automation (Scapy, Socket)</li>
-                  <li>• Unix Bash & Secure Scripting</li>
-                  <li>• Container Isolation (Docker, k8s)</li>
-                  <li>• CI/CD Secure Pipeline Controls</li>
+                  <li data-i18n="skill-automation-item1">• Python Scripting (OOP & Socket Automation)</li>
+                  <li data-i18n="skill-automation-item2">• Unix Bash Shell Scripting & C Programming</li>
+                  <li data-i18n="skill-automation-item3">• Virtualization (VMware, VirtualBox)</li>
+                  <li data-i18n="skill-automation-item4">• Cisco Packet Tracer Lab Mockups</li>
                 </ul>
               </div>
 
@@ -247,90 +276,188 @@
         <!-- Projects Section -->
         <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 reveal" aria-label="Projects Log">
           <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-charcoal/85 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-0 lg:w-auto lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-            <h2 class="font-serif text-sm font-bold tracking-widest text-cream uppercase lg:hidden">03 / Projects</h2>
+            <h2 data-i18n="projects-heading" class="font-serif text-sm font-bold tracking-widest text-cream uppercase lg:hidden">03 / Projects</h2>
           </div>
 
           <div class="project-list flex flex-col gap-6">
             
-            <!-- Project Card 1 -->
+            <!-- Project Card 1: Wazuh -->
             <div class="project-card group relative grid sm:grid-cols-8 gap-4 p-6 rounded-lg border border-transparent transition-all lg:hover:shadow-[inset_0_1px_0_0_rgba(245,242,235,0.05)]">
-              
-              <!-- Category / Metadata -->
-              <div class="sm:col-span-2 text-xs font-semibold tracking-wider text-slate/50 uppercase pt-1">
-                Net-Infrastructure
+              <div class="sm:col-span-2 text-[10px] font-semibold tracking-wider text-slate/50 uppercase pt-1" data-i18n="project-1-meta">
+                Academic Project
               </div>
-              
-              <!-- Content -->
               <div class="sm:col-span-6">
                 <h3 class="font-serif text-lg font-medium text-cream group-hover:text-cream/90 transition-colors">
-                  <a id="project-link-vpn" href="#" class="inline-flex items-center gap-1 group/link focus:outline-none">
-                    <span>Cloud VPN Architecture & Network Diagnostics</span>
-                    <!-- Up-Right arrow animated on hover -->
+                  <a id="project-link-wazuh" href="https://github.com/issama17" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 group/link focus:outline-none">
+                    <span data-i18n="project-1-title">Wazuh SIEM & Suricata NIDS Integration</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4.5 w-4.5 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none" aria-hidden="true">
                       <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path>
                     </svg>
                   </a>
                 </h3>
-                <p class="mt-2 text-sm text-slate leading-relaxed">
-                  Designed and implemented a high-availability cloud VPN solution to secure cross-premises data transfer. Conducted thorough packet analysis, bottleneck detection, and low-latency route configuration, reducing latency overhead by 30% while ensuring AES-256 encryption across all endpoints.
+                <p data-i18n="project-1-desc" class="mt-2 text-sm text-slate leading-relaxed">
+                  Deployed a full Wazuh SIEM architecture (Manager + Agents) integrated with Suricata NIDS for EVE JSON event analysis. Conducted simulated Red Team campaigns (Nmap scans, SSH/FTP/RDP brute force with Hydra, SQLMap injections, and hping3 SYN flood DoS) from Kali Linux, correlating and auditing events to validate rule coverage.
                 </p>
                 <div class="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
-                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">IPsec</span>
-                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Wireshark</span>
-                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">AWS VPC</span>
-                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Routing</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Wazuh SIEM</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Suricata NIDS</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Red Teaming</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Log Analysis</span>
                 </div>
               </div>
             </div>
 
-            <!-- Project Card 2 -->
+            <!-- Project Card 2: Snort -->
             <div class="project-card group relative grid sm:grid-cols-8 gap-4 p-6 rounded-lg border border-transparent transition-all lg:hover:shadow-[inset_0_1px_0_0_rgba(245,242,235,0.05)]">
-              
-              <!-- Category / Metadata -->
-              <div class="sm:col-span-2 text-xs font-semibold tracking-wider text-slate/50 uppercase pt-1">
-                App-Architecture
+              <div class="sm:col-span-2 text-[10px] font-semibold tracking-wider text-slate/50 uppercase pt-1" data-i18n="project-2-meta">
+                Personal Lab
               </div>
-              
-              <!-- Content -->
               <div class="sm:col-span-6">
                 <h3 class="font-serif text-lg font-medium text-cream group-hover:text-cream/90 transition-colors">
-                  <a id="project-link-ctf" href="#" class="inline-flex items-center gap-1 group/link focus:outline-none">
-                    <span>Object-Oriented CTF Platform</span>
-                    <!-- Up-Right arrow animated on hover -->
+                  <a id="project-link-snort" href="https://github.com/issama17" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 group/link focus:outline-none">
+                    <span data-i18n="project-2-title">Snort IDS/IPS Inline Deployment</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4.5 w-4.5 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none" aria-hidden="true">
                       <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path>
                     </svg>
                   </a>
                 </h3>
-                <p class="mt-2 text-sm text-slate leading-relaxed">
-                  Engineered a modular, containerized Capture The Flag (CTF) training platform using object-oriented principles. Features secure, isolated sandbox environments for security exercises, automated challenge provisioning, and real-time scoring trackers, designed to train security teams on defensive concepts.
+                <p data-i18n="project-2-desc" class="mt-2 text-sm text-slate leading-relaxed">
+                  Installed and configured Snort 3 in inline IPS mode (NFQ) for active threat blocking. Developed custom detection rules targeting ICMP traffic anomalies, SSH brute-forcing, and Nmap SYN scans. Validated defensive actions against web vectors like SQL injections.
                 </p>
                 <div class="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
-                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Python</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Snort 3</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">IPS Inline</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Custom Rules</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Netfilter Queue</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 3: CTF Platform -->
+            <div class="project-card group relative grid sm:grid-cols-8 gap-4 p-6 rounded-lg border border-transparent transition-all lg:hover:shadow-[inset_0_1px_0_0_rgba(245,242,235,0.05)]">
+              <div class="sm:col-span-2 text-[10px] font-semibold tracking-wider text-slate/50 uppercase pt-1" data-i18n="project-3-meta">
+                Academic Project
+              </div>
+              <div class="sm:col-span-6">
+                <h3 class="font-serif text-lg font-medium text-cream group-hover:text-cream/90 transition-colors">
+                  <a id="project-link-ctf" href="https://github.com/issama17" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 group/link focus:outline-none">
+                    <span data-i18n="project-3-title">Capture The Flag Web Platform</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4.5 w-4.5 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path>
+                    </svg>
+                  </a>
+                </h3>
+                <p data-i18n="project-3-desc" class="mt-2 text-sm text-slate leading-relaxed">
+                  Engineered and launched a functional, multiplayer web CTF platform built on object-oriented programming in Python. Implemented user-isolated challenge execution, automated scoring trackers, and clean administration panels. Hosted in production on Railway.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Python (OOP)</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Web Security</span>
                   <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Docker</span>
-                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">OOP</span>
-                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Sandboxing</span>
+                  <span class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase bg-navy border border-cream/5 text-cream/80 rounded">Railway</span>
                 </div>
               </div>
             </div>
 
           </div>
+        </section>
 
-          <!-- CTA to Resume / Consultation -->
-          <div class="mt-12 px-6">
-            <a id="btn-cta" href="mailto:contact@issam.security" class="inline-flex items-center gap-2.5 px-6 py-3 border border-cream/20 text-cream font-medium tracking-wide uppercase text-xs transition-all duration-300 hover:border-cream hover:bg-cream hover:text-charcoal hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-1 focus:ring-cream/50">
-              Request Advisory Briefing
+        <!-- Education Section -->
+        <section id="education" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 reveal" aria-label="Education History">
+          <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-charcoal/85 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-0 lg:w-auto lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+            <h2 data-i18n="education-heading" class="font-serif text-sm font-bold tracking-widest text-cream uppercase lg:hidden">04 / Education & Certs</h2>
+          </div>
+
+          <!-- Academic Degrees -->
+          <div class="space-y-8">
+            <div class="grid sm:grid-cols-8 gap-4 p-6 rounded-lg border border-transparent transition-all lg:hover:shadow-[inset_0_1px_0_0_rgba(245,242,235,0.03)] lg:hover:bg-[#151719]/10">
+              <div class="sm:col-span-2 text-xs font-semibold tracking-wider text-slate/50 uppercase pt-1">
+                2025 - Present
+              </div>
+              <div class="sm:col-span-6">
+                <h3 data-i18n="edu-dut-title" class="font-serif text-lg font-medium text-cream">
+                  DUT in Cybersecurity
+                </h3>
+                <p data-i18n="edu-dut-school" class="text-xs text-slate/70 mt-1">EST Tétouan, Morocco — 2025 - Present</p>
+                <p data-i18n="edu-dut-desc" class="mt-2 text-sm text-slate leading-relaxed">
+                  Key Courses: Networks & Security (OSI/TCP-IP, Firewalls, VPN, IDS/IPS), Windows Server (AD, GPO), Python, C, SQL.
+                </p>
+              </div>
+            </div>
+            
+            <div class="grid sm:grid-cols-8 gap-4 p-6 rounded-lg border border-transparent transition-all lg:hover:shadow-[inset_0_1px_0_0_rgba(245,242,235,0.03)] lg:hover:bg-[#151719]/10">
+              <div class="sm:col-span-2 text-xs font-semibold tracking-wider text-slate/50 uppercase pt-1">
+                2025
+              </div>
+              <div class="sm:col-span-6">
+                <h3 data-i18n="edu-bac-title" class="font-serif text-lg font-medium text-cream">
+                  Baccalauréat in Physical Sciences
+                </h3>
+                <p data-i18n="edu-bac-school" class="text-xs text-slate/70 mt-1">Lycée Abdelkhalek Torres, Tétouan — Mention Bien (French/Bilingual option)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Industry Certifications -->
+          <div class="mt-12 border-t border-slate/10 pt-8 px-6">
+            <h4 data-i18n="certs-title" class="font-serif text-xl font-medium text-cream mb-6">Industry Certifications</h4>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="p-4 border border-slate/10 bg-charcoal-light/50 rounded-lg">
+                <h5 data-i18n="cert-1-title" class="text-xs font-bold text-cream tracking-wide uppercase">Getting Started with Cisco Packet Tracer</h5>
+                <p data-i18n="cert-1-issuer" class="text-[10px] text-slate mt-1">Cisco Networking Academy — May 2026</p>
+              </div>
+              <div class="p-4 border border-slate/10 bg-charcoal-light/50 rounded-lg">
+                <h5 data-i18n="cert-2-title" class="text-xs font-bold text-cream tracking-wide uppercase">Introduction to Cybersecurity</h5>
+                <p data-i18n="cert-2-issuer" class="text-[10px] text-slate mt-1">Cisco Networking Academy — Apr 2026</p>
+              </div>
+              <div class="p-4 border border-slate/10 bg-charcoal-light/50 rounded-lg sm:col-span-2">
+                <h5 data-i18n="cert-3-title" class="text-xs font-bold text-cream tracking-wide uppercase">Foundations of Cybersecurity</h5>
+                <p data-i18n="cert-3-issuer" class="text-[10px] text-slate mt-1">Google / Coursera — Apr 2026</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTF Competitions -->
+          <div class="mt-12 border-t border-slate/10 pt-8 px-6">
+            <h4 data-i18n="ctf-heading" class="font-serif text-xl font-medium text-cream mb-4">CTF Competitions</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start gap-2">
+                <span class="text-cream font-serif">🏆</span>
+                <p data-i18n="ctf-ensi-desc" class="text-slate">ENSI 2K26 CTF (Cyberspace x ENSI) — 11 Flags solved (May 2026)</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-cream font-serif">🏆</span>
+                <p data-i18n="ctf-nsec-desc" class="text-slate">NorthSec 2026 — 6 Flags solved (April 2026)</p>
+              </div>
+              <p data-i18n="ctf-skills-desc" class="text-xs text-slate/50 italic pl-6 mt-1">Acquired Competencies: Digital Forensics, Web Exploitation, Reverse Engineering.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer / Contact Trigger -->
+        <footer class="max-w-md pb-16 text-xs text-slate-muted/50 leading-relaxed font-medium" aria-label="Site footer">
+          
+          <!-- Bottom Download Option -->
+          <div class="mb-8">
+            <a id="btn-download-resume-footer" href="CV_Echahbouni_Issam.pdf" download class="inline-flex items-center gap-2 px-5 py-2.5 border border-cream/10 bg-navy/20 text-cream font-medium tracking-wide uppercase text-[10px] transition-all duration-300 hover:border-cream/30 hover:bg-navy/40 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              <span data-i18n="btn-download-resume">Download Resume PDF</span>
+            </a>
+          </div>
+
+          <!-- Bottom CTA to contact -->
+          <div class="mb-12">
+            <a id="btn-cta" href="mailto:issam.echahbouni@etu.uae.ac.ma" class="inline-flex items-center gap-2.5 px-6 py-3 border border-cream/20 text-cream font-medium tracking-wide uppercase text-xs transition-all duration-300 hover:border-cream hover:bg-cream hover:text-charcoal hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-1 focus:ring-cream/50">
+              <span data-i18n="btn-consultation">Initiate Briefing</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </a>
           </div>
 
-        </section>
-
-        <!-- Footer -->
-        <footer class="max-w-md pb-16 text-xs text-slate-muted/50 leading-relaxed font-medium" aria-label="Site footer">
-          <p>
+          <p data-i18n="footer-desc">
             Designed & Engineered with absolute discretion. Built using custom structural markup, Tailwind CSS utility layers, and lightweight client-side scripts. Deployable instantly on Vercel.
           </p>
           <p class="mt-2 text-[10px] uppercase tracking-wider text-slate-muted/30">
