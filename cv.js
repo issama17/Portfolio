@@ -181,4 +181,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Language
   updateLanguage(currentLang);
+
+  // 3. Print Actual PDF function
+  const printBtn = document.getElementById('btn-print-cv');
+  if (printBtn) {
+    printBtn.addEventListener('click', () => {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        window.open('CV_Echahbouni_Issam.pdf', '_blank');
+      } else {
+        const iframe = document.createElement('iframe');
+        iframe.style.position = 'fixed';
+        iframe.style.right = '0';
+        iframe.style.bottom = '0';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = 'none';
+        iframe.src = 'CV_Echahbouni_Issam.pdf';
+        
+        document.body.appendChild(iframe);
+        
+        iframe.onload = () => {
+          setTimeout(() => {
+            try {
+              iframe.contentWindow.focus();
+              iframe.contentWindow.print();
+            } catch (e) {
+              window.open('CV_Echahbouni_Issam.pdf', '_blank');
+            }
+          }, 200);
+        };
+      }
+    });
+  }
 });
