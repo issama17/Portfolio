@@ -360,56 +360,127 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Language
   updateLanguage(currentLang);
 
-  // 3. tsParticles Integration
-  function setupParticlesBackground() {
-    if (typeof tsParticles !== 'undefined') {
-      tsParticles.load("tsparticles", {
-        particles: {
-          links: {
-            enable: true,
-            distance: 120,
-            opacity: 0.12,
-            color: "#f5f2eb",
-          },
-          number: {
-            density: {
-              enable: true,
-              value_area: 800,
-            },
-            value: 45,
-          },
-          size: {
-            value: 1.5,
-          },
-          move: {
-            direction: "none",
-            enable: true,
-            outMode: "bounce",
-            random: false,
-            speed: 1.2,
-            straight: false,
-          },
-          opacity: {
-            value: 0.25,
-          },
-          color: {
-            value: "#f5f2eb",
-          },
-          shape: {
-            type: "circle",
-          },
-        },
-        retina_detect: true,
-      });
+  // 3. Custom Interactive Canvas Particles (Cyber-Dust)
+  function initParticlesBackground() {
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null, active: false };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createParticles();
     }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        // Natural slow drift
+        this.dx = (Math.random() - 0.5) * 0.35;
+        this.dy = (Math.random() - 0.5) * 0.35;
+        // Mouse push velocities
+        this.vx = 0;
+        this.vy = 0;
+        this.radius = 0.6 + Math.random() * 1.2;
+        this.baseOpacity = 0.15 + Math.random() * 0.35;
+        this.opacity = this.baseOpacity;
+        this.twinkleSpeed = 0.005 + Math.random() * 0.015;
+        this.twinkleOffset = Math.random() * Math.PI * 2;
+        // Theme Colors: 60% Slate, 30% Cream, 10% Navy Light
+        const rand = Math.random();
+        if (rand < 0.6) {
+          this.color = '143, 151, 163'; // Slate
+        } else if (rand < 0.9) {
+          this.color = '245, 242, 235'; // Cream
+        } else {
+          this.color = '30, 47, 74';    // Navy Light
+        }
+      }
+
+      update(time) {
+        // Calculate repulsion force if mouse is active
+        if (mouse.active && mouse.x !== null && mouse.y !== null) {
+          const dx = this.x - mouse.x;
+          const dy = this.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          const maxDist = 130; // Repulsion radius
+
+          if (dist < maxDist) {
+            const force = (maxDist - dist) / maxDist;
+            const angle = Math.atan2(dy, dx);
+            // Apply organic push force
+            const push = force * force * 0.45;
+            this.vx += Math.cos(angle) * push;
+            this.vy += Math.sin(angle) * push;
+          }
+        }
+
+        // Apply velocities and friction
+        this.x += this.dx + this.vx;
+        this.y += this.dy + this.vy;
+        this.vx *= 0.92;
+        this.vy *= 0.92;
+
+        // Wrap around boundaries
+        if (this.x < -10) this.x = canvas.width + 10;
+        if (this.x > canvas.width + 10) this.x = -10;
+        if (this.y < -10) this.y = canvas.height + 10;
+        if (this.y > canvas.height + 10) this.y = -10;
+
+        // Twinkle opacity using sine wave
+        this.opacity = this.baseOpacity + Math.sin(time * this.twinkleSpeed + this.twinkleOffset) * 0.12;
+        this.opacity = Math.max(0.05, Math.min(this.opacity, 0.7));
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    function createParticles() {
+      particles = [];
+      const density = 14000; // Pixels per particle
+      const count = Math.min(85, Math.floor((canvas.width * canvas.height) / density));
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    let frameId;
+    function animate(time) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update(time);
+        particles[i].draw();
+      }
+      frameId = requestAnimationFrame(animate);
+    }
+
+    // Mouse events
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.active = false;
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+
+    resizeCanvas();
+    frameId = requestAnimationFrame(animate);
   }
 
-  if (document.getElementById('tsparticles')) {
-    const particlesScript = document.createElement("script");
-    particlesScript.src = "https://cdn.jsdelivr.net/npm/tsparticles-preset-links@2.12.0/tsparticles.preset.links.bundle.min.js";
-    particlesScript.onload = setupParticlesBackground;
-    document.body.appendChild(particlesScript);
-  }
+  initParticlesBackground();
 
 
   // 3. Mouse Spotlight Effect (Desktop only)
